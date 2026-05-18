@@ -1,32 +1,32 @@
 ---
 const menuItems = [
-  { id: "home", name: "Home" },
-  { id: "about", name: "About" },
-  { id: "projects", name: "Projects" },
-  { id: "contact", name: "Contact" },
+  { id: "home", name: "Работы" },
+  { id: "about", name: "Услуги" },
+  { id: "projects", name: "Обо мне" },
+  { id: "contact", name: "Контакты" },
 ];
 ---
 
 <nav 
   x-data="{ mobileMenuOpen: false }" 
-  class="sticky top-0 z-50 w-full h-16 bg-white border-b border-zinc-200 px-4 flex items-center justify-between"
+  class="sticky top-0 z-50 w-full h-16 lg:h-[4.5rem] bg-black-blue text-white border-b border-zinc-200 px-4 flex items-center justify-between"
 >
   <!-- Logo/Brand -->
-  <div class="font-bold text-xl">
-    <a href="/">Portfolio</a>
+  <div class=" text-xl" id="title">
+    <a href="/">{ "{H} Рукавишникова"}</a>
   </div>
 
   <!-- Desktop Menu -->
-  <div class="hidden sm:flex items-center gap-6">
+  <div id="desktop-menu" class="hidden sm:flex  items-center gap-6 lg:gap-12 md:pr-8 lg:pr-12">
     {menuItems.map(item => (
-      <a href={`#${item.id}`} class="text-zinc-600 hover:text-black transition-colors">{item.name}</a>
+      <a href={`#${item.id}`} class="text-white hover:text-zinc-300 transition-colors">{item.name}</a>
     ))}
   </div>
 
   <!-- Mobile Toggle -->
   <button 
     @click="mobileMenuOpen = !mobileMenuOpen" 
-    class="sm:hidden p-2 text-zinc-600 focus:outline-none"
+    class="sm:hidden p-2 text-zinc-300 focus:outline-none"
     aria-label="Toggle Menu"
   >
     <svg 
@@ -51,7 +51,8 @@ const menuItems = [
   </button>
 
   <!-- Mobile Menu -->
-  <div 
+  <div
+    id="mobile-menu"
     x-show="mobileMenuOpen" 
     x-cloak
     x-transition:enter="transition ease-out duration-200"
@@ -67,3 +68,13 @@ const menuItems = [
     ))}
   </div>
 </nav>
+
+<style>
+@reference "../../styles/global.css";
+
+#title > a,
+#desktop-menu > a,
+#mobile-menu > a {
+  @apply text-[1.2rem] md:text-[1.4] lg:text-[1.5rem] font-features-['smcp'] tracking-tight uppercase font-medium;
+}
+</style>
