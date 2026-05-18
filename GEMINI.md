@@ -46,4 +46,5 @@ The project follows the standard Astro directory layout:
 - **Layouts:** All pages should be wrapped in a layout from `src/layout/` to ensure consistent structure across the site.
 - **Page Structure:** Use the `BaseSection` component to define major sections of a page, passing a unique `id` via props for anchoring.
 - **Interactivity:** Use Alpine.js for lightweight client-side interactivity, with logic organized in `src/scripts/alpine/`.
+- **Lists & Menus:** Avoid hardcoding repetitive list elements (e.g., multiple `<li>` or `<a>` tags). Instead, define data in an array within the frontmatter and use `.map()` to render the elements dynamically.
 - **Routing:** To create a new page, add a file to `src/pages/`.

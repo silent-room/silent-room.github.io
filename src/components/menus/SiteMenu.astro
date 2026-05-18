@@ -1,5 +1,10 @@
 ---
-const menuItems = ["Home", "About", "Projects", "Contact"];
+const menuItems = [
+  { id: "home", name: "Home" },
+  { id: "about", name: "About" },
+  { id: "projects", name: "Projects" },
+  { id: "contact", name: "Contact" },
+];
 ---
 
 <nav 
@@ -14,7 +19,7 @@ const menuItems = ["Home", "About", "Projects", "Contact"];
   <!-- Desktop Menu -->
   <div class="hidden sm:flex items-center gap-6">
     {menuItems.map(item => (
-      <a href={`#${item}`} class="text-zinc-600 hover:text-black transition-colors">{item}</a>
+      <a href={`#${item.id}`} class="text-zinc-600 hover:text-black transition-colors">{item.name}</a>
     ))}
   </div>
 
@@ -58,7 +63,7 @@ const menuItems = ["Home", "About", "Projects", "Contact"];
     class="absolute top-16 left-0 w-full bg-white border-b border-zinc-200 flex flex-col p-4 gap-4 sm:hidden"
   >
     {menuItems.map(item => (
-      <a href={`#${item}`} @click="mobileMenuOpen = false" class="text-zinc-600 hover:text-black transition-colors py-2">{item}</a>
+      <a href={`#${item.id}`} @click="mobileMenuOpen = false" class="text-zinc-600 hover:text-black transition-colors py-2">{item.name}</a>
     ))}
   </div>
 </nav>
