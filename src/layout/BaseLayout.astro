@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css'
+import BaseHeader from '../components/BaseHeader.astro';
+import BaseFooter from '../components/BaseFooter.astro';
 
 const {title="Site"} = Astro.props;
 ---
@@ -11,6 +13,10 @@ const {title="Site"} = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot/>
+		<BaseHeader/>
+			<main>
+				<slot/>
+			</main>
+		<BaseFooter/>
 	</body>
 </html>
