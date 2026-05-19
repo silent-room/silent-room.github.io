@@ -4,7 +4,7 @@ This is a personal portfolio website built with the Astro framework. It is desig
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Astro](https://astro.build/) (v6.3.3)
+- **Framework:** [Astro](https://astro.build/) (v6.3.3) - *Note: As of 2026, v6.x.x is the current stable release.*
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (via Vite plugin)
 - **Interactivity:** [Alpine.js](https://alpinejs.dev/)
 - **Package Manager:** [Bun](https://bun.sh/)

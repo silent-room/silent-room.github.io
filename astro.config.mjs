@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -10,6 +10,24 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  fonts: [
+    {
+      name: "Inter",
+      cssVariable: "--font-inter",
+      provider: fontProviders.fontsource(),
+      subsets: ["latin", "cyrillic"],
+      formats: ["woff2", "woff"],
+      fallbacks: [
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+      ],
+    },
+  ],
 
   integrations: [alpinejs({ entrypoint: "/src/scripts/alpine/entrypoint" })],
 });

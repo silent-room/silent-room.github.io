@@ -1,5 +1,6 @@
 ---
-import '../styles/global.css'
+import '../styles/global.css';
+import { Font } from "astro:assets";
 import BaseHeader from '../components/BaseHeader.astro';
 import BaseFooter from '../components/BaseFooter.astro';
 
@@ -11,6 +12,7 @@ const {title="Site"} = Astro.props;
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{title}</title>
+		<Font cssVariable="--font-inter" />
 	</head>
 	<body>
 		<BaseHeader/>
