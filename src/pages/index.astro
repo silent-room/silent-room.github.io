@@ -12,23 +12,36 @@ const sections = ["Мода", "Красота", "Продукт", "Портре�
 					<div class="w-full h-1/2 lg:flex-1 lg:h-full">
 						<img src="https://picsum.photos/1200/1200" alt="Retouch" class="w-full h-full object-cover">
 					</div>
-
-					<!-- Right Half: Content -->
-					<div class="w-full lg:flex-1 flex justify-center items-center">
-						<div class="wrapper p-8">
-							<ul class="flex flex-col space-y-3">
-								{sections.map(item => (
-									<li class="group relative text-3xl md:text-4xl lg:text-5xl text-center extra-bold uppercase font-features-['smcp'] mb-8 leading-[0.7] cursor-pointer">
-										<a href="" class="relative z-10 block text-zinc-600 group-hover:text-zinc-200 transition-colors duration-200">
-											{item}
-										</a>
-										<div class="absolute inset-y-0 -left-2 -right-2 z-0 bg-red-400 opacity-0 group-hover:opacity-100 transition-all duration-200 -rotate-2 scale-x-125 scale-y-160"></div>
-									</li>
-								))}								
-							</ul>
-							<p class="mt-8" ></p>
-						</div>
-					</div>
+<!-- Right Half: Content -->
+<div class="w-full lg:flex-1 flex justify-center items-center">
+	<div class="wrapper p-8">
+		<ul 
+			x-data="{ activeItem: null }" 
+			@click="activeItem = $event.target.closest('li')?.dataset.id"
+			class="flex flex-col space-y-3"
+		>
+			{sections.map((item, index) => (
+				<li 
+					data-id={index}
+					class="group relative text-3xl md:text-4xl lg:text-5xl text-center extra-bold uppercase font-features-['smcp'] mb-8 leading-[0.7] cursor-pointer"
+				>
+					<a 
+						href="#" 
+						class="relative z-10 block transition-colors duration-200 group-hover:text-zinc-200"
+						:class={`activeItem == ${index} ? 'text-zinc-200' : 'text-zinc-600'`}
+					>
+						{item}
+					</a>
+					<div 
+						class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-2 scale-x-125 scale-y-160 group-hover:opacity-100"
+						:class={`activeItem == ${index} ? 'bg-black opacity-100' : 'bg-red-400 opacity-0'`}
+						x-cloak
+					></div>
+				</li>
+			))}								
+			</ul>		<p class="mt-8" ></p>
+	</div>
+</div>
 				</div>
 </BaseSection>
 </BaseLayout>

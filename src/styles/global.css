@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+[x-cloak] { display: none !important; }
+
 @theme {
   --color-black-blue: #020513;
 
