@@ -2,7 +2,7 @@
 import BaseLayout from "../layout/BaseLayout.astro"
 import BaseSection from "../components/sections/BaseSection.astro"
 const id = "works";
-const sections = ["Мода", "Красота", "Продукт", "Портрет"];
+const sections = ["Мода", "Красота", "Продукт", "Портрет", "Коллаж"];
 ---
 
 <BaseLayout>
@@ -19,8 +19,8 @@ const sections = ["Мода", "Красота", "Продукт", "Портре�
 							<ul class="flex flex-col space-y-3">
 								{sections.map(item => (
                   
-									<li class="text-4xl md:text-5xl lg:text-6xl text-center extra-bold uppercase font-features-['smcp'] mb-8  text-zinc-600 leading-[0.7]">
-										<span >{item}</span>
+									<li class="text-3xl md:text-4xl lg:text-5xl text-center extra-bold uppercase font-features-['smcp'] mb-8  text-zinc-600 leading-[0.7]">
+										<a href ="">{item}</a>
 									</li>
                 ))}								
 							</ul>
