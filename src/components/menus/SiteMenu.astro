@@ -9,7 +9,7 @@ const menuItems = [
 
 <nav 
   x-data="{ mobileMenuOpen: false }" 
-  class="sticky top-0 z-50 w-full h-12 md:h-14 lg:h-[4rem] bg-black-blue text-white border-b border-zinc-200 px-4 flex items-center justify-between"
+  class="sticky top-0 z-50 w-full h-12 md:h-14 lg:h-[4rem] bg-black-blue text-white px-4 flex items-center justify-between"
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
@@ -61,7 +61,7 @@ const menuItems = [
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 -translate-y-2"
-    class="absolute top-12c left-0 w-full bg-white border-b border-zinc-200 flex flex-col p-4 gap-4 sm:hidden"
+    class="absolute top-12 left-0 w-full bg-white border-b border-zinc-200 flex flex-col p-4 gap-4 sm:hidden"
   >
     {menuItems.map(item => (
       <a href={`#${item.id}`} @click="mobileMenuOpen = false" class="text-zinc-600 hover:text-black transition-colors py-2">{item.name}</a>

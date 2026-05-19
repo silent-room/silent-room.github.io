@@ -1,11 +1,32 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro"
 import BaseSection from "../components/sections/BaseSection.astro"
-const id = "Home";
+const id = "works";
+const sections = ["Мода", "Красота", "Продукт", "Портрет"];
 ---
 
 <BaseLayout>
 <BaseSection {id}>
-<h1>Hello, world</h1>
+<div class="flex flex-col lg:flex-row gap-8 w-full h-full">
+					<!-- Left Half: Image -->
+					<div class="w-full h-1/2 lg:flex-1 lg:h-full">
+						<img src="https://picsum.photos/1200/1200" alt="Retouch" class="w-full h-full object-cover">
+					</div>
+
+					<!-- Right Half: Content -->
+					<div class="w-full lg:flex-1 flex justify-center items-center">
+						<div class="wrapper p-8">
+							<ul class="flex flex-col space-y-3">
+								{sections.map(item => (
+                  
+									<li class="text-4xl md:text-5xl lg:text-6xl text-center extra-bold uppercase font-features-['smcp'] mb-8  text-zinc-600 leading-[0.7]">
+										<span >{item}</span>
+									</li>
+                ))}								
+							</ul>
+							<p class="mt-8" ></p>
+						</div>
+					</div>
+				</div>
 </BaseSection>
 </BaseLayout>
