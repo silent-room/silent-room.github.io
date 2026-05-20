@@ -1,38 +1,16 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro"
-import BaseSection from "../components/sections/BaseSection.astro"
-import PagesMenu from "../components/menus/PagesMenu.astro"
-import data from "../data/data.json"
-
-const worksData = data.find(s => s.id === "works");
-const sections = worksData?.content.map(item => ({
-  label: item.title,
-  href: `#${item.id}`
-})) ?? [];
+import WorksSection from "../components/sections/WorksSection.astro"
 ---
 
 <BaseLayout>
-<BaseSection id="works">
-<div class="flex flex-col lg:flex-row gap-8 w-full h-full">
-					<!-- Left Half: Image -->
-					<div class="w-full h-1/2 lg:flex-1 lg:h-full">
-						<img src="https://picsum.photos/1200/1200" alt="Retouch" class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none">
-					</div>
-<!-- Right Half: Content -->
-<div class="w-full lg:flex-1 flex justify-center items-center">
-	<div class="wrapper p-8">
-		<PagesMenu items={sections} />
-	</div>
-</div>
-				</div>
-</BaseSection>
+  <WorksSection />
 
-<BaseSection id="services"><p>services</p></BaseSection>
-<BaseSection id="service-color-correction"><p>service-color-correction</p></BaseSection>
-<BaseSection id="service-retouch"><p>service-retouch</p></BaseSection>
-<BaseSection id="service-collage"><p>service-collage</p></BaseSection>
-<BaseSection id="service-education"><p>service-education</p></BaseSection>
-<BaseSection id="about"><p>about</p></BaseSection>
-<BaseSection id="contacts"><p>contacts</p></BaseSection>
-
+  <BaseSection id="services"><p>services</p></BaseSection>
+  <BaseSection id="service-color-correction"><p>service-color-correction</p></BaseSection>
+  <BaseSection id="service-retouch"><p>service-retouch</p></BaseSection>
+  <BaseSection id="service-collage"><p>service-collage</p></BaseSection>
+  <BaseSection id="service-education"><p>service-education</p></BaseSection>
+  <BaseSection id="about"><p>about</p></BaseSection>
+  <BaseSection id="contacts"><p>contacts</p></BaseSection>
 </BaseLayout>
