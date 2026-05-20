@@ -1,10 +1,10 @@
 ---
-const menuItems = [
-  { id: "works", name: "Работы" },
-  { id: "services", name: "Услуги" },
-  { id: "about", name: "Обо мне" },
-  { id: "contacts", name: "Контакты" },
-];
+import data from "../../data/data.json";
+
+const menuItems = data.map(section => ({
+  id: section.id,
+  name: section.title
+}));
 ---
 
 <nav 

@@ -2,19 +2,17 @@
 import BaseLayout from "../layout/BaseLayout.astro"
 import BaseSection from "../components/sections/BaseSection.astro"
 import PagesMenu from "../components/menus/PagesMenu.astro"
+import data from "../data/data.json"
 
-const id = "works";
-const sections = [
-  { label: "Мода", href: "#" },
-  { label: "Красота", href: "#" },
-  { label: "Продукт", href: "#" },
-  { label: "Портрет", href: "#" },
-  { label: "Коллаж", href: "#" },
-];
+const worksData = data.find(s => s.id === "works");
+const sections = worksData.content.map(item => ({
+  label: item.title,
+  href: `#${item.id}`
+}));
 ---
 
 <BaseLayout>
-<BaseSection {id}>
+<BaseSection id="works">
 <div class="flex flex-col lg:flex-row gap-8 w-full h-full">
 					<!-- Left Half: Image -->
 					<div class="w-full h-1/2 lg:flex-1 lg:h-full">
