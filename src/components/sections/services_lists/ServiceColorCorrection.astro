@@ -1,0 +1,25 @@
+---
+import BaseSection from "../BaseSection.astro"
+import data from "../../../data/data.json"
+
+const servicesData = data.find(s => s.id === "services");
+const service = servicesData?.content.find(s => s.id === "color-correction");
+---
+
+{service && (
+  <BaseSection id="service-color-correction">
+    <div class="wrapper p-8 w-full">
+      <h2 class="text-4xl font-bold uppercase mb-8">{service.title}</h2>
+      <ul class="space-y-2">
+        {service.list.map(item => (
+          <li class="text-lg">{item.title}</li>
+        ))}
+      </ul>
+      {service.default_price && (
+        <p class="mt-4 text-lg">
+          {service.default_price} руб./{service.quantity}
+        </p>
+      )}
+    </div>
+  </BaseSection>
+)}
