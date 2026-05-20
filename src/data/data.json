@@ -29,12 +29,12 @@
   {
     "id": "services",
     "title": "Услуги",
-    "image": "",
+    "image": "02.jpg",
     "content": [
       {
         "id": "retouch",
         "title": "Ретушь",
-        "image": "",
+        "image": "03.jpg",
         "list": [
           {
             "title": "Базовая чистка кожи",
@@ -57,7 +57,7 @@
       {
         "id": "color-correction",
         "title": "Цветокоррекция",
-        "image": "",
+        "image": "04.jpg",
         "list": [
           {
             "title": "Выравнивание экспозиции"
@@ -75,7 +75,7 @@
       {
         "id": "collage",
         "title": "Коллаж",
-        "image": "",
+        "image": "05.jpg",
         "list": [
           {
             "title": "Частичная замена фона"
@@ -92,7 +92,7 @@
       {
         "id": "education",
         "title": "Обучение",
-        "image": "",
+        "image": "06.jpg",
         "list": [
           {
             "title": "Базовая работа в Raw-конвертерах"
