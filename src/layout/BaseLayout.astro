@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Font } from "astro:assets";
-import BaseHeader from '../components/BaseHeader.astro';
+import SiteMenu from '../components/menus/SiteMenu.astro';
 import BaseFooter from '../components/BaseFooter.astro';
 
 const {title="Site"} = Astro.props;
@@ -15,7 +15,7 @@ const {title="Site"} = Astro.props;
 		<Font cssVariable="--font-inter" />
 	</head>
 	<body>
-		<BaseHeader/>
+		<SiteMenu/>
 			<main>
 				<slot/>
 			</main>

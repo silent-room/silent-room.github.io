@@ -3,7 +3,7 @@ import BaseLayout from "../layout/BaseLayout.astro"
 import BaseSection from "../components/sections/BaseSection.astro"
 import PagesMenu from "../components/menus/PagesMenu.astro"
 
-const id = "works";
+const id = "main";
 const sections = [
   { label: "Мода", href: "#" },
   { label: "Красота", href: "#" },
@@ -28,4 +28,14 @@ const sections = [
 </div>
 				</div>
 </BaseSection>
+
+<BaseSection id="works"><p>works</p></BaseSection>
+<BaseSection id="services"><p>services</p></BaseSection>
+<BaseSection id="service-color-correction"><p>service-color-correction</p></BaseSection>
+<BaseSection id="service-retouch"><p>service-retouch</p></BaseSection>
+<BaseSection id="service-collage"><p>service-collage</p></BaseSection>
+<BaseSection id="service-education"><p>service-education</p></BaseSection>
+<BaseSection id="about"><p>about</p></BaseSection>
+<BaseSection id="contacts"><p>contacts</p></BaseSection>
+
 </BaseLayout>
