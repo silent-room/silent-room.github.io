@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layout/BaseLayout.astro"
+import BaseSection from "../components/sections/BaseSection.astro"
 import WorksSection from "../components/sections/WorksSection.astro"
+import AboutSection from "../components/sections/AboutSection.astro"
+import ContactsSection from "../components/sections/ContactsSection.astro"
 ---
 
 <BaseLayout>
@@ -11,6 +14,6 @@ import WorksSection from "../components/sections/WorksSection.astro"
   <BaseSection id="service-retouch"><p>service-retouch</p></BaseSection>
   <BaseSection id="service-collage"><p>service-collage</p></BaseSection>
   <BaseSection id="service-education"><p>service-education</p></BaseSection>
-  <BaseSection id="about"><p>about</p></BaseSection>
-  <BaseSection id="contacts"><p>contacts</p></BaseSection>
+  <AboutSection />
+  <ContactsSection />
 </BaseLayout>
