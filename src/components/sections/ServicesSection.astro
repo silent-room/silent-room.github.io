@@ -3,14 +3,15 @@ import BaseSection from "./BaseSection.astro"
 import PagesMenu from "../menus/PagesMenu.astro"
 import data from "../../data/data.json"
 
-const servicesData = data.find(s => s.id === "services");
-const sections = servicesData?.content.map(item => ({
+const id = "services";
+const sectionData = data.find(s => s.id === id);
+const sections = sectionData?.content.map(item => ({
   label: item.title,
   href: `#${item.id}`
 })) ?? [];
 ---
 
-<BaseSection id="services">
+<BaseSection {id}>
   <div class="wrapper p-8 flex justify-center items-center w-full">
     <PagesMenu items={sections} />
   </div>

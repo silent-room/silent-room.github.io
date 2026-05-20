@@ -2,12 +2,13 @@
 import BaseSection from "../BaseSection.astro"
 import data from "../../../data/data.json"
 
+const id = "education";
 const servicesData = data.find(s => s.id === "services");
-const service = servicesData?.content.find(s => s.id === "education");
+const service = servicesData?.content.find(s => s.id === id);
 ---
 
 {service && (
-  <BaseSection id="service-education">
+  <BaseSection {id}>
     <div class="wrapper p-8 w-full">
       <h2 class="text-4xl font-bold uppercase mb-8">{service.title}</h2>
       <ul class="space-y-2">
