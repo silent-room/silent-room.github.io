@@ -1,0 +1,32 @@
+---
+interface Props {
+  items: { label: string; href: string }[];
+}
+const { items } = Astro.props;
+---
+
+<ul
+  x-data="{ activeItem: null }"
+  @click="activeItem = $event.target.closest('li')?.dataset.id"
+  class="flex flex-col space-y-3"
+>
+  {items.map((item, index) => (
+    <li
+      data-id={index}
+      class="group relative text-3xl md:text-4xl lg:text-5xl text-center extra-bold uppercase font-features-['smcp'] mb-8 leading-[0.7] cursor-pointer"
+    >
+      <a
+        href={item.href}
+        class="relative z-10 block transition-colors duration-200 group-hover:text-zinc-200"
+        :class={`activeItem == ${index} ? 'text-zinc-200' : 'text-zinc-600'`}
+      >
+        {item.label}
+      </a>
+      <div
+        class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-2 scale-x-125 scale-y-160 group-hover:opacity-100"
+        :class={`activeItem == ${index} ? 'bg-black opacity-100' : 'bg-red-400 opacity-0'`}
+        x-cloak
+      ></div>
+    </li>
+  ))}
+</ul>
