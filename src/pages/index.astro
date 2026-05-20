@@ -5,10 +5,10 @@ import PagesMenu from "../components/menus/PagesMenu.astro"
 import data from "../data/data.json"
 
 const worksData = data.find(s => s.id === "works");
-const sections = worksData.content.map(item => ({
+const sections = worksData?.content.map(item => ({
   label: item.title,
   href: `#${item.id}`
-}));
+})) ?? [];
 ---
 
 <BaseLayout>
