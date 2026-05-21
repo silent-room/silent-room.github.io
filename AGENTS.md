@@ -48,3 +48,23 @@ public/           static assets (favicons)
 
 - No lint, typecheck, or test suite configured.
 - `.vscode/launch.json` references `./node_modules/.bin/astro dev` — use `bun dev` instead.
+- **AGENTS.md must be written in English only.**
+
+## Firefox MCP — Taking Screenshots
+
+Firefox MCP server does not start automatically. Steps:
+
+1. Ensure the dev server is running (`bun dev`).
+2. Start Firefox with the binary path and URL:
+   ```
+   firefox_restart_firefox(
+     firefoxPath="/Applications/Firefox.app/Contents/MacOS/firefox",
+     startUrl="http://localhost:4321"
+   )
+   ```
+3. Then call `firefox_navigate_page` or `firefox_take_snapshot` to launch the browser.
+4. Find an element by ID: `firefox_take_snapshot` → `firefox_resolve_uid_to_selector`.
+5. Screenshot an element: `firefox_screenshot_by_uid(uid=..., saveTo="screenshots/name.png")`.
+6. Full page screenshot: `firefox_screenshot_page(saveTo="screenshots/name.png")`.
+
+Binary path: `/Applications/Firefox.app/Contents/MacOS/firefox`
