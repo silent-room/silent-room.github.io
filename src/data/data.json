@@ -3,6 +3,7 @@
     "id": "works",
     "title": "Работы",
     "image": "01.jpg",
+    "href": "/works/",
     "content": [
       {
         "id": "fashion",
@@ -35,11 +36,13 @@
     "id": "services",
     "title": "Услуги",
     "image": "02.jpg",
+    "href": "/services/",
     "content": [
       {
         "id": "retouch",
         "title": "Ретушь",
         "image": "03.jpg",
+        "href": "/services/retouch/",
         "list": [
           {
             "title": "Базовая чистка кожи",
@@ -63,6 +66,7 @@
         "id": "color-correction",
         "title": "Цветокоррекция",
         "image": "04.jpg",
+        "href": "/services/color-correction/",
         "list": [
           {
             "title": "Выравнивание экспозиции"
@@ -81,6 +85,7 @@
         "id": "collage",
         "title": "Коллаж",
         "image": "05.jpg",
+        "href": "/services/collage/",
         "list": [
           {
             "title": "Частичная замена фона"
@@ -98,6 +103,7 @@
         "id": "education",
         "title": "Обучение",
         "image": "06.jpg",
+        "href": "/services/education/",
         "list": [
           {
             "title": "Базовая работа в Raw-конвертерах"
@@ -123,11 +129,13 @@
   {
     "id": "about",
     "title": "Обо мне",
+    "href": "/about/",
     "content": []
   },
   {
     "id": "contacts",
     "title": "Контакты",
+    "href": "/contacts/",
     "content": []
   }
 ]

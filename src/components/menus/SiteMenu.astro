@@ -1,9 +1,13 @@
 ---
 import data from "../../data/data.json";
 
+const currentPath = Astro.url.pathname;
+
 const menuItems = data.map(section => ({
   id: section.id,
-  name: section.title
+  name: section.title,
+  href: section.href ?? `#${section.id}`,
+  active: section.href ? currentPath.startsWith(section.href) : false
 }));
 ---
 
@@ -19,7 +23,7 @@ const menuItems = data.map(section => ({
   <!-- Desktop Menu -->
   <div id="desktop-menu" class="hidden sm:flex  items-center gap-6 lg:gap-12 md:pr-8 lg:pr-12">
     {menuItems.map(item => (
-      <a href={`#${item.id}`} class="text-white hover:text-zinc-300 transition-colors">{item.name}</a>
+      <a href={item.href} class={`transition-colors ${item.active ? 'text-zinc-200' : 'text-white hover:text-zinc-300'}`}>{item.name}</a>
     ))}
   </div>
 
@@ -64,7 +68,7 @@ const menuItems = data.map(section => ({
     class="absolute top-12 left-0 w-full bg-white border-b border-zinc-200 flex flex-col p-4 gap-4 sm:hidden"
   >
     {menuItems.map(item => (
-      <a href={`#${item.id}`} @click="mobileMenuOpen = false" class="text-zinc-600 hover:text-black transition-colors py-2">{item.name}</a>
+      <a href={item.href} @click="mobileMenuOpen = false" class={`transition-colors py-2 ${item.active ? 'text-black font-bold' : 'text-zinc-600 hover:text-black'}`}>{item.name}</a>
     ))}
   </div>
 </nav>
