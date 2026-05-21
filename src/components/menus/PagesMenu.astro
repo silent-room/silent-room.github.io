@@ -6,6 +6,8 @@ const { items } = Astro.props;
 ---
 
 <ul
+  x-data="{ activeItem: null }"
+  @click="activeItem = $event.target.closest('li')?.dataset.id; $store.gallery.setCategory(parseInt(activeItem))"
   class="flex flex-col space-y-3"
 >
   {items.map((item, index) => (
@@ -15,15 +17,14 @@ const { items } = Astro.props;
     >
       <a
         href={item.href}
-        @click.prevent="$store.gallery.setCategory(${index})"
         class="relative z-10 block transition-colors duration-200 group-hover:text-zinc-200"
-        :class="$store.gallery.activeCategory == ${index} ? 'text-zinc-200' : 'text-zinc-600'"
+        :class={`activeItem == ${index} ? 'text-zinc-200' : 'text-zinc-600'`}
       >
         {item.label}
       </a>
       <div
         class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-2 scale-x-125 scale-y-160 group-hover:opacity-100"
-        :class="$store.gallery.activeCategory == ${index} ? 'bg-black opacity-100' : 'bg-red-400 opacity-0'"
+        :class={`activeItem == ${index} ? 'bg-black opacity-100' : 'bg-red-400 opacity-0'`}
         x-cloak
       ></div>
     </li>

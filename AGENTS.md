@@ -11,7 +11,7 @@ Package manager is **Bun**. Node >= 22.12.0.
 
 **Use `bun dev` only** — do not run `bun build` or `bun preview`. To verify changes, start `bun dev` and check in browser. If network issues occur (e.g. fontsource API failures), use `pr bun dev` instead (`pr` = shell alias for proxychains).
 
-**Commit after each step** — always commit changes before moving to the next task. Use `git add -A && git commit -m "..."` after every completed step.
+**NEVER commit without explicit user permission.** Always wait for confirmation before running `git commit`. Partial or unverified work must NOT be committed.
 
 ## Stack
 
