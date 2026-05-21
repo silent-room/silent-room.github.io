@@ -1,0 +1,32 @@
+---
+interface Props {
+  categories: { id: string; title: string; images: string[] }[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div
+  x-data="{
+    get activeCategory() {
+      return $store.gallery.activeCategory;
+    },
+    get images() {
+      const idx = $store.gallery.activeCategory;
+      return categories[idx]?.images ?? [];
+    }
+  }"
+  class="w-full h-full overflow-y-auto"
+>
+  <div class="grid grid-cols-4 gap-1 p-1">
+    <template x-for="(img, idx) in images" :key="idx">
+      <div class="aspect-square overflow-hidden cursor-pointer">
+        <img
+          :src="`src/images/${img}`"
+          :alt="categories[activeCategory]?.title"
+          class="w-full h-full object-cover transition-opacity duration-300 hover:opacity-80"
+        />
+      </div>
+    </template>
+  </div>
+</div>

@@ -19,6 +19,7 @@ Package manager is **Bun**. Node >= 22.12.0.
 - **Tailwind CSS v4** via `@tailwindcss/vite` plugin (not PostCSS). Uses `@import "tailwindcss"` in CSS.
 - **Alpine.js** for client interactivity. Entrypoint: `src/scripts/alpine/entrypoint.ts` (configured in `astro.config.mjs`).
 - **Inter font** via `fontProviders.fontsource()`, subsets: latin + cyrillic.
+- Images in `src/images/` are numbered JPGs (01–61) and serve as placeholders. Use any images from this folder unless explicitly told which specific image to use.
 
 ## Architecture
 
