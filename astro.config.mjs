@@ -14,7 +14,9 @@ export default defineConfig({
     {
       name: "Inter",
       cssVariable: "--font-inter",
-      provider: fontProviders.fontsource(),
+      provider: fontProviders.google(),
+      styles: ["normal", "italic"],
+      weights: ["100 900"],
       subsets: ["latin", "cyrillic"],
       formats: ["woff2", "woff"],
       fallbacks: [
