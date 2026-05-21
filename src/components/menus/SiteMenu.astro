@@ -6,8 +6,8 @@ const currentPath = Astro.url.pathname;
 const menuItems = data.map(section => ({
   id: section.id,
   name: section.title,
-  href: section.href ?? `#${section.id}`,
-  active: section.href ? currentPath.startsWith(section.href) : false
+  href: section.id === "works" ? "/" : (section.href ?? `#${section.id}`),
+  active: section.id === "works" ? currentPath === "/" : (section.href ? currentPath.startsWith(section.href) : false)
 }));
 ---
 
