@@ -13,11 +13,12 @@ const { items } = Astro.props;
   {items.map((item, index) => (
     <li
       data-id={index}
-      class="group relative text-3xl md:text-4xl lg:text-5xl text-center font-extrabold md:font-bold uppercase font-features-['smcp'] mb-6 leading-[0.7] cursor-pointer"
+      class="group relative text-3xl md:text-4xl lg:text-5xl text-left font-extrabold md:font-bold uppercase font-features-['smcp'] mb-6 leading-[0.7] cursor-pointer"
     >
       <a
         href={item.href}
-        class="relative z-10 block transition-colors duration-200 group-hover:text-olive-100 text-black-blue"
+        class="relative z-10 block transition-colors duration-200 group-hover:text-olive-100"
+        :class={`activeItem == ${index} ? 'text-white' : 'text-black-blue'`}
       >
         {item.label}
       </a>
