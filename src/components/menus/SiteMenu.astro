@@ -65,7 +65,7 @@ const menuItems = data.map(section => ({
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 -translate-y-2"
-    class="fixed inset-x-0 top-10 bottom-0 bg-white flex flex-col items-center justify-center gap-6 sm:hidden"
+    class="fixed inset-x-0 top-10 bottom-0 bg-olive-50 flex flex-col items-center justify-center gap-6 sm:hidden"
   >
     {menuItems.map(item => (
       <a href={item.href} @click="mobileMenuOpen = false" class={`transition-colors text-center py-2 ${item.active ? 'text-black font-bold' : 'text-zinc-600 hover:text-black'}`}>{item.name}</a>
