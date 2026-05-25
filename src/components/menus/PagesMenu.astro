@@ -23,7 +23,7 @@ const { items } = Astro.props;
         {item.label}
       </a>
       <div
-        class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-2 scale-x-125 scale-y-160 group-hover:opacity-100"
+        class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-6 scale-x-125 scale-y-200 group-hover:opacity-100"
         :class={`activeItem == ${index} ? 'bg-black opacity-100' : 'bg-rose-400 opacity-0'`}
         x-cloak
       ></div>
