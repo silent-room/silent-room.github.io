@@ -65,10 +65,10 @@ const menuItems = data.map(section => ({
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 -translate-y-2"
-    class="absolute top-12 left-0 w-full bg-white border-b border-zinc-200 flex flex-col p-4 gap-4 sm:hidden"
+    class="fixed inset-x-0 top-10 bottom-0 bg-white flex flex-col items-center justify-center gap-6 sm:hidden"
   >
     {menuItems.map(item => (
-      <a href={item.href} @click="mobileMenuOpen = false" class={`transition-colors py-2 ${item.active ? 'text-black font-bold' : 'text-zinc-600 hover:text-black'}`}>{item.name}</a>
+      <a href={item.href} @click="mobileMenuOpen = false" class={`transition-colors text-center py-2 ${item.active ? 'text-black font-bold' : 'text-zinc-600 hover:text-black'}`}>{item.name}</a>
     ))}
   </div>
 </nav>
@@ -77,8 +77,11 @@ const menuItems = data.map(section => ({
 @reference "../../styles/global.css";
 
 #title > a,
-#desktop-menu > a,
-#mobile-menu > a {
+#desktop-menu > a {
   @apply text-base sm:text-[1rem] md:text-[1.1rem] lg:text-[1.15rem] font-features-['smcp'] tracking-tight uppercase font-extrabold;
+}
+
+#mobile-menu > a {
+  @apply text-3xl md:text-4xl lg:text-5xl font-features-['smcp'] tracking-tight uppercase font-extrabold;
 }
 </style>
