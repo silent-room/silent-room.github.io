@@ -13,7 +13,7 @@ const menuItems = data.map(section => ({
 
 <nav 
   x-data="{ mobileMenuOpen: false }" 
-  class="sticky top-0 z-50 w-full h-12 md:h-14 lg:h-[4rem] bg-black-blue text-white px-4 flex items-center justify-between"
+  class="sticky top-0 z-50 w-full h-10 md:h-10 lg:h-12 bg-black-blue text-white px-4 flex items-center justify-between"
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
@@ -79,6 +79,6 @@ const menuItems = data.map(section => ({
 #title > a,
 #desktop-menu > a,
 #mobile-menu > a {
-  @apply text-base sm:text-[1.1rem] md:text-[1.2rem] lg:text-[1.3rem] font-features-['smcp'] tracking-tight uppercase font-extrabold;
+  @apply text-base sm:text-[1rem] md:text-[1.1rem] lg:text-[1.15rem] font-features-['smcp'] tracking-tight uppercase font-extrabold;
 }
 </style>
