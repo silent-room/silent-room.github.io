@@ -13,7 +13,7 @@ const menuItems = data.map(section => ({
 
 <nav 
   x-data="{ mobileMenuOpen: false }" 
-  class="sticky top-0 z-50 w-full h-10 md:h-10 lg:h-12 bg-black-blue text-white px-4 flex items-center justify-between"
+  class="sticky top-0 z-50 w-full h-10 md:h-10 lg:h-12 bg-black-blue text-white px-4 lg:pl-24 flex items-center justify-between"
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
@@ -21,7 +21,7 @@ const menuItems = data.map(section => ({
   </div>
 
   <!-- Desktop Menu -->
-  <div id="desktop-menu" class="hidden sm:flex  items-center gap-6 lg:gap-12 md:pr-8 lg:pr-12">
+  <div id="desktop-menu" class="hidden sm:flex  items-center gap-6 xl:gap-24 md:pr-8 xl:pr-24">
     {menuItems.map(item => (
       <a href={item.href} class={`transition-colors ${item.active ? 'text-zinc-200' : 'text-white hover:text-zinc-300'}`}>{item.name}</a>
     ))}
