@@ -22,11 +22,11 @@ const service = servicesData?.content.find(s => s.id === id);
             <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl text-olive-50 text-center font-bold uppercase font-features-['smcp']">{service?.title}</h2>
             <div class="absolute inset-y-0 -left-2 -right-2 z-0 -rotate-9 sm:-rotate-5 scale-x-165 scale-y-160 bg-rose-400 opacity-100"></div>
           </div>
-          <ul class="pl-4 space-y-2 text-left">
+          <ul class="px-4 space-y-2 text-left">
             {service?.list.map(item => (
-              <li class="text-lg text-zinc-500 font-medium">
+              <li class="text-lg text-zinc-500 font-medium flex flex-col">
                 {item.title}
-                {"price" in item && item.price && <span class="text-price-gray"> — {item.price} руб./{item.quantity}</span>}
+                {"price" in item && item.price && <span class="text-price-gray self-end">{item.price} руб./{item.quantity}</span>}
               </li>
             ))}
           </ul>
