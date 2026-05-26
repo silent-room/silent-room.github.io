@@ -16,11 +16,11 @@ const service = servicesData?.content.find(s => s.id === id);
       </div>
       <!-- Content -->
       <div class="w-full lg:flex-1 flex justify-center items-center">
-        <div class="wrapper px-24 xl:px-48">
+        <div class="wrapper w-[23.75rem] text-center">
           <!-- <a href="/services/" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors mb-6 inline-block">← Назад к услугам</a> -->
           <div class="group relative inline-block mb-8">
-            <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase font-features-['smcp']">{service?.title}</h2>
-            <div class="absolute inset-y-0 -left-2 -right-2 z-0 -rotate-6 scale-x-125 scale-y-200 bg-rose-400 opacity-100"></div>
+            <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl text-olive-50 text-center font-bold uppercase font-features-['smcp']">{service?.title}</h2>
+            <div class="absolute inset-y-0 -left-2 -right-2 z-0 -rotate-9 sm:-rotate-5 scale-x-125 scale-y-160 bg-rose-400 opacity-100"></div>
           </div>
           <ul class="space-y-2">
             {service?.list.map(item => (
