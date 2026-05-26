@@ -24,13 +24,13 @@ const service = servicesData?.content.find(s => s.id === id);
           </div>
           <ul class="px-4 space-y-2 text-left">
             {service?.list.map(item => (
-              <li class="text-lg text-zinc-500 font-medium flex flex-col">
+              <li class="text-lg text-zinc-500 font-medium flex flex-col border-b-1 border-dashed border-zinc-700 pb-2">
                 {item.title}
                 {"price" in item && item.price && <span class="text-price-gray self-end">{item.price} руб./{item.quantity}</span>}
               </li>
             ))}
           </ul>
-          {"note" in service && service.note && <p class="mt-4 text-sm text-zinc-500">{service.note}</p>}
+          {"note" in service && service.note && <p class="px-4 mt-8 text-left italic text-zinc-500 font-light">{service.note}</p>}
         </div>
       </div>
     </div>
