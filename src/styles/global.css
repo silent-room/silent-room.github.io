@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+  display: none !important;
+}
 
 @theme {
   --color-black-blue: #020513;
+  --color-price-gray: #74a7c1;
 
   /* --font-sans: */
   /* "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", */

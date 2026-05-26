@@ -9,7 +9,7 @@ const service = servicesData?.content.find(s => s.id === id);
 
 <BaseLayout title={service?.title ?? "Ретушь"}>
   <section class="w-full h-[calc(100svh-3rem)] md:h-[calc(100svh-3.5rem)] lg:h-[calc(100svh-4rem)] flex">
-    <div class="flex flex-col lg:flex-row w-full h-full">
+    <div class="flex flex-col lg:flex-row w-full h-full gap-8 sm:gap-20 lg:gap-0">
       <!-- Image -->
       <div class="w-full h-1/2 lg:flex-1 lg:h-full">
         <img src={`/src/images/${service?.image}`} alt={service?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none">
@@ -18,15 +18,15 @@ const service = servicesData?.content.find(s => s.id === id);
       <div class="w-full lg:flex-1 flex justify-center items-center">
         <div class="wrapper w-[23.75rem] text-center">
           <!-- <a href="/services/" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors mb-6 inline-block">← Назад к услугам</a> -->
-          <div class="group relative inline-block mb-20">
+          <div class="group relative inline-block mb-20 xl:mb-25">
             <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl text-olive-50 text-center font-bold uppercase font-features-['smcp']">{service?.title}</h2>
             <div class="absolute inset-y-0 -left-2 -right-2 z-0 -rotate-9 sm:-rotate-5 scale-x-165 scale-y-160 bg-rose-400 opacity-100"></div>
           </div>
           <ul class="pl-4 space-y-2 text-left">
             {service?.list.map(item => (
-              <li class="text-lg">
+              <li class="text-lg text-zinc-500 font-medium">
                 {item.title}
-                {"price" in item && item.price && <span> — {item.price} руб./{item.quantity}</span>}
+                {"price" in item && item.price && <span class="text-price-gray"> — {item.price} руб./{item.quantity}</span>}
               </li>
             ))}
           </ul>
