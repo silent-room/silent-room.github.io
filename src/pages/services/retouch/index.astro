@@ -15,7 +15,7 @@ const service = servicesData?.content.find(s => s.id === id);
         <img src={`/src/images/${service?.image}`} alt={service?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none">
       </div>
       <!-- Content -->
-      <div class="w-full lg:flex-1 flex justify-center items-center">
+      <div class="w-full lg:flex-1 overflow-y-auto h-full flex justify-center py-12 lg:py-20">
         <div class="wrapper w-[23.75rem] text-center">
           <!-- <a href="/services/" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors mb-6 inline-block">← Назад к услугам</a> -->
           <div class="group relative inline-block mb-20 xl:mb-25">
