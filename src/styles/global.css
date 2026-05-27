@@ -28,3 +28,7 @@
 @utility clip-path-none {
   clip-path: none;
 }
+
+@utility section {
+  @apply w-full min-h-[calc(100svh-2.5rem)] md:min-h-[calc(100svh-2.5rem)] lg:min-h-[calc(100svh-3rem)];
+}
