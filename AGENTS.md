@@ -13,6 +13,13 @@ Package manager is **Bun**. Node >= 22.12.0.
 
 **NEVER commit without explicit user permission.** Always wait for confirmation before running `git commit`. Partial or unverified work must NOT be committed.
 
+## Instruction Types
+
+- **Direct instruction** ("make a commit", "replace class X with Y") — executed without asking.
+  The command is specific: what to do + which tool to use.
+- **Ambiguous request** ("undo changes", "fix it", "make it work") — requires approach
+  confirmation before execution. If a task admits multiple solutions, ask first.
+
 ## Stack
 
 - **Astro 6** (file-based routing in `src/pages/`)
