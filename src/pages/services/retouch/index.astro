@@ -8,11 +8,11 @@ const service = servicesData?.content.find(s => s.id === id);
 ---
 
 <BaseLayout title={service?.title ?? "Ретушь"}>
-  <section class="w-full h-[calc(100svh-2.5rem)] md:h-[calc(100svh-2.5rem)] lg:h-[calc(100svh-3rem)] flex">
-    <div class="flex flex-col lg:flex-row w-full h-full">
+  <section class="w-full min-h-[calc(100svh-2.5rem)] md:min-h-[calc(100svh-2.5rem)] lg:min-h-[calc(100svh-3rem)] flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
       <!-- Image -->
-      <div class="w-full h-1/2 lg:flex-1 lg:h-full">
-        <img src={`/src/images/${service?.image}`} alt={service?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none">
+      <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
+        <img src={`/src/images/${service?.image}`} alt={service?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0">
       </div>
       <!-- Content -->
       <div class="w-full lg:flex-1 flex justify-center items-center">
