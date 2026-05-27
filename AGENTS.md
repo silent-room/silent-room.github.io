@@ -52,6 +52,10 @@ public/           static assets (favicons)
 - Alpine.js state lives inline in templates (`x-data`); register plugins/globals in `entrypoint.ts`.
 - Custom theme tokens (colors, fonts) go in `@theme` / `@theme inline` blocks in `global.css`.
 
+## Communication
+
+- Before taking any action, explain what you are about to do and why. Wait for confirmation before proceeding with file operations, code changes, or executing commands.
+
 ## Notes
 
 - No lint, typecheck, or test suite configured.
