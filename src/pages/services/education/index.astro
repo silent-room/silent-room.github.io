@@ -16,8 +16,8 @@ const serviceNote = service?.note;
         <img src={`/src/images/${service?.image}`} alt={service?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0">
       </div>
       <!-- Content -->
-      <div class="w-full lg:flex-1 flex justify-center items-center pt-24">
-        <div class="wrapper w-[23.75rem] text-center">
+      <div class="w-full lg:flex-1 flex justify-center items-center">
+        <div class="wrapper w-[23.75rem] text-center lg:pt-16">
           <!-- <a href="/services/" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors mb-6 inline-block">← Назад к услугам</a> -->
           <div class="group relative inline-block mb-20 xl:mb-25">
             <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl text-olive-50 text-center font-bold uppercase font-features-['smcp']">{service?.title}</h2>
@@ -31,7 +31,7 @@ const serviceNote = service?.note;
             ))}
           </ul>
           {"default_price" in service && service.default_price && <p class="px-4 mt-4 text-right text-price-gray border-b-1 border-dashed border-zinc-700 pb-2">{service.default_price} руб./{service.quantity}</p>}
-          {serviceNote && <div class="px-4 mt-8 text-left italic text-zinc-500 font-light" set:html={serviceNote}></div>}
+          {serviceNote && <div class="px-4 mt-8 text-left italic text-zinc-500 font-light space-y-4" set:html={serviceNote}></div>}
 
           <a href="/services/" class="flex items-center gap-4 px-4 mt-12 group cursor-pointer">
             <div class="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-sky-400">
