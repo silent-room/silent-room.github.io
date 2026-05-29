@@ -27,10 +27,10 @@ const serviceNote = service?.note;
             {service?.list.map(item => (
               <li class="text-lg text-zinc-500 font-medium flex flex-col border-b-1 border-dashed border-zinc-700 pb-2">
                 {item.title}
-                {"price" in item && item.price ? <span class="text-price-gray self-end">{item.price} руб./{item.quantity}</span> : "default_price" in service && service.default_price && <span class="text-price-gray self-end">{service.default_price} руб./{service.quantity}</span>}
               </li>
             ))}
           </ul>
+          {"default_price" in service && service.default_price && <p class="px-4 mt-4 text-left text-price-gray">{service.default_price} руб./{service.quantity}</p>}
           {serviceNote && <div class="px-4 mt-8 text-left italic text-zinc-500 font-light" set:html={serviceNote}></div>}
 
           <a href="/services/" class="flex items-center gap-4 px-4 mt-12 group cursor-pointer">
