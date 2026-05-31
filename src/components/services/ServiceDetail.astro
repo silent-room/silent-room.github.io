@@ -1,4 +1,5 @@
 ---
+import BaseSection from "../sections/BaseSection.astro";
 interface ServiceItem {
   id: string;
   title: string;
@@ -22,7 +23,7 @@ const hasDefaultPrice = "default_price" in service && service.default_price != n
 const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
 ---
 
-<section class="section flex">
+<BaseSection>
   <div class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
     <!-- Image -->
     <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
@@ -99,4 +100,4 @@ const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
       </div>
     </div>
   </div>
-</section>
+</BaseSection>

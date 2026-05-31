@@ -1,8 +1,9 @@
 ---
-
 const { id } = Astro.props;
 ---
 
-<section id={id} class="w-full h-[calc(100svh-3rem)] md:h-[calc(100svh-3.5rem)] scroll-mt-[3rem] md:scroll-mt-[3.5rem] lg:h-[calc(100svh-4rem)] lg:scroll-mt-[4rem] flex">
+<section
+  {id}
+  class="w-full min-h-[calc(100svh-2.5rem)] md:min-h-[calc(100svh-2.5rem)] scroll-mt-[2.5rem] md:scroll-mt-[2.5rem] lg:min-h-[calc(100svh-3rem)] lg:scroll-mt-[3rem] flex"
+>
   <slot/>
-</section>

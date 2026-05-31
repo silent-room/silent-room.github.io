@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layout/BaseLayout.astro"
+import BaseSection from "../../components/sections/BaseSection.astro"
 import PagesMenu from "../../components/menus/PagesMenu.astro"
 import data from "../../data/data.json"
 
@@ -11,7 +12,7 @@ const sections = sectionData?.content.map(item => ({
 ---
 
 <BaseLayout title="Услуги">
-  <section class="section flex">
+  <BaseSection id="services">
     <div class="flex flex-col lg:flex-row-reverse w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
       <!-- Image -->
       <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
@@ -24,5 +25,5 @@ const sections = sectionData?.content.map(item => ({
         </div>
       </div>
     </div>
-  </section>
+  </BaseSection>
 </BaseLayout>
