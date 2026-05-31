@@ -56,6 +56,10 @@ public/           static assets (favicons)
 
 - Before taking any action, explain what you are about to do and why. Wait for confirmation before proceeding with file operations, code changes, or executing commands.
 
+## Mass File Operations
+
+- Warn before deleting or moving more than one file at a time. List the exact files and get confirmation.
+
 ## Notes
 
 - No lint, typecheck, or test suite configured.

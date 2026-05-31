@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro"
+import ServiceDetail from "../../components/services/ServiceDetail.astro"
+import data from "../../data/data.json"
+
+export async function getStaticPaths() {
+  const servicesData = data.find(s => s.id === "services");
+  return servicesData?.content.map(service => ({
+    params: { slug: service.id },
+    props: { service },
+  })) ?? [];
+}
+
+const { slug } = Astro.params;
+const { service } = Astro.props;
+---
+---
+
+<BaseLayout title={service.title}>
+  <ServiceDetail service={service} />
+</BaseLayout>

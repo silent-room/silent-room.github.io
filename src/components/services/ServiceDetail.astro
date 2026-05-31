@@ -1,0 +1,102 @@
+---
+interface ServiceItem {
+  id: string;
+  title: string;
+  image?: string;
+  href?: string;
+  list?: { title: string; price?: number; quantity?: string }[];
+  default_price?: number;
+  quantity?: string;
+  note?: string;
+}
+
+interface Props {
+  service: ServiceItem;
+}
+
+const { service } = Astro.props;
+
+const hasPerItemPrices = service.list?.some(item => "price" in item && item.price != null);
+const hasDefaultPrice = "default_price" in service && service.default_price != null;
+// collage mode: no per-item prices, no default_price
+const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
+---
+
+<section class="section flex">
+  <div class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
+    <!-- Image -->
+    <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
+      <img
+        src={`/src/images/${service.image}`}
+        alt={service.title}
+        class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="w-full lg:flex-1 flex justify-center items-center">
+      <div class="wrapper w-[23.75rem] text-center lg:pt-16">
+        <!-- Heading with decorative underline -->
+        <div class="group relative inline-block mb-20 xl:mb-25">
+          <h2 class="relative z-10 text-3xl md:text-4xl lg:text-5xl text-olive-50 text-center font-bold uppercase font-features-['smcp']">
+            {service.title}
+          </h2>
+          <div class="absolute inset-y-0 -left-2 -right-2 z-0 -rotate-9 sm:-rotate-5 scale-x-165 scale-y-160 bg-rose-400 opacity-100"></div>
+        </div>
+
+        <ul class="px-12 space-y-2 text-left">
+          {service.list?.map(item => {
+            const liClass = hasPerItemPrices
+              ? "text-lg text-zinc-500 font-medium flex flex-col border-b-1 border-dashed border-zinc-700 pb-2"
+              : hasDefaultPrice
+                ? "text-lg text-zinc-500 font-medium flex flex-col pb-2"
+                : "text-lg text-zinc-500 font-medium flex flex-col";
+            return (
+              <li class={liClass}>
+                {item.title}
+                {hasPerItemPrices && "price" in item && item.price != null && (
+                  <span class="text-price-gray self-end">{item.price} руб./{item.quantity}</span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <!-- Default price (shown once below list, e.g. цветокоррекция, обучение) -->
+        {hasDefaultPrice && (
+          <p class="px-4 mt-4 text-right text-price-gray border-b-1 border-dashed border-zinc-700 pb-2">
+            {service.default_price} руб./{service.quantity}
+          </p>
+        )}
+
+        <!-- Collage mode: just a divider when no prices at all -->
+        {isCollageMode && (
+          <div class="mt-4 border-b-1 border-dashed border-zinc-700 pb-2"></div>
+        )}
+
+        <!-- Note -->
+        {service.note && (
+          <div
+            class="px-4 mt-8 text-left italic text-zinc-500 font-light space-y-4"
+            set:html={service.note}
+          ></div>
+        )}
+
+        <!-- Back link -->
+        <a
+          href="/services/"
+          class="flex items-center gap-4 px-4 mt-12 group cursor-pointer"
+        >
+          <div class="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+          </div>
+          <span class="text-sm font-bold uppercase tracking-wider text-zinc-400 group-hover:text-sky-600 transition-colors">
+            Вернуться к списку услуг
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
