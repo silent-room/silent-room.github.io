@@ -1,6 +1,7 @@
 ---
 import BaseSection from "./BaseSection.astro"
 import PagesMenu from "../menus/PagesMenu.astro"
+import GalleryGrid from "../gallery/GalleryGrid.astro"
 import data from "../../data/data.json"
 
 const id = "works";
@@ -13,11 +14,38 @@ const sections = sectionData?.content.map(item => ({
 
 <BaseSection {id}>
   <div class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
-    <!-- Image -->
+    <!-- Left: Cover / Gallery Grid -->
     <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
-      <img src={`/src/images/${sectionData?.image}`} alt={sectionData?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0">
+      <!-- Cover Image (default state) -->
+      <img
+        x-show="$store.gallery.activeCategory === null"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        src={`/src/images/${sectionData?.image}`}
+        alt={sectionData?.title}
+        class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
+      >
+
+      <!-- Gallery Grid (active state) -->
+      <div
+        x-show="$store.gallery.activeCategory !== null"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute inset-0 overflow-y-auto bg-white"
+      >
+        <GalleryGrid categories={sectionData?.content ?? []} />
+      </div>
     </div>
-    <!-- Menu -->
+
+    <!-- Menu (untouched) -->
     <div class="w-full lg:flex-1 flex justify-center items-center">
       <div class="wrapper p-8">
         <PagesMenu items={sections} />
