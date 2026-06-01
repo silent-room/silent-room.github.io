@@ -71,20 +71,23 @@ const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
 
         <!-- Default price (shown once below list, e.g. цветокоррекция, обучение) -->
         {hasDefaultPrice && (
-          <p class="px-4 mt-4 text-right text-price-gray border-b-1 border-dashed border-zinc-700 pb-2">
-            {service.default_price} руб./{service.quantity}
-          </p>
+          <div class="px-12">
+            <p class="mt-4 text-right text-price-gray border-b-1 border-dashed border-zinc-700 pb-2">
+              {service.default_price} руб./{service.quantity}
+            </p>
+          </div>
         )}
 
         <!-- Collage mode: just a divider when no prices at all -->
         {isCollageMode && (
-          <div class="mt-4 border-b-1 border-dashed border-zinc-700 pb-2"></div>
+          <div class="px-12">
+            <div class="mt-4 border-b-1 border-dashed border-zinc-700 pb-2"></div>
+          </div>
         )}
 
         <!-- Note -->
         {service.note && (
-          <div
-            class="px-4 mt-8 text-left italic text-zinc-500 font-light space-y-4"
+          <div class="px-12 mt-8 text-left italic text-zinc-500 font-light space-y-4"
             set:html={service.note}
           ></div>
         )}
