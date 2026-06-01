@@ -5,16 +5,20 @@ import data from "../../data/data.json"
 
 export async function getStaticPaths() {
   const servicesData = data.find(s => s.id === "services");
-  return servicesData?.content.map(service => ({
+  const servicesList = servicesData?.content ?? [];
+  return servicesList.map((service, i) => ({
     params: { slug: service.id },
-    props: { service },
+    props: {
+      service,
+      prev: i > 0 ? { title: servicesList[i-1].title, href: servicesList[i-1].href } : null,
+      next: i < servicesList.length - 1 ? { title: servicesList[i+1].title, href: servicesList[i+1].href } : null,
+    },
   })) ?? [];
 }
 
-const { slug } = Astro.params;
-const { service } = Astro.props;
+const { service, prev, next } = Astro.props;
 ---
 
 <BaseLayout title={service.title}>
-  <ServiceDetail service={service} />
+  <ServiceDetail {service} {prev} {next} />
 </BaseLayout>

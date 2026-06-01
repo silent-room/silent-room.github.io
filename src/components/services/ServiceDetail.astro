@@ -10,12 +10,18 @@ interface ServiceItem {
   quantity?: string;
   note?: string;
 }
+interface NavItem {
+  title: string;
+  href: string;
+}
 
 interface Props {
   service: ServiceItem;
+  prev?: NavItem | null;
+  next?: NavItem | null;
 }
 
-const { service } = Astro.props;
+const { service, prev, next } = Astro.props;
 
 const hasPerItemPrices = service.list?.some(item => "price" in item && item.price != null);
 const hasDefaultPrice = "default_price" in service && service.default_price != null;
@@ -35,7 +41,7 @@ const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
     </div>
 
     <!-- Content -->
-    <div class="w-full lg:flex-1 flex justify-center items-center">
+    <div class="w-full lg:flex-1 flex flex-col justify-center items-center">
       <div class="wrapper w-[23.75rem] text-center lg:pt-16">
         <!-- Heading with decorative underline -->
         <div class="group relative inline-block mb-20 xl:mb-25">
@@ -83,20 +89,20 @@ const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
           ></div>
         )}
 
-        <!-- Back link -->
-        <a
-          href="/services/"
-          class="flex items-center gap-4 px-4 mt-12 group cursor-pointer"
-        >
-          <div class="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-sky-400">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
-          </div>
-          <span class="text-sm font-bold uppercase tracking-wider text-zinc-400 group-hover:text-sky-600 transition-colors">
-            Вернуться к списку услуг
-          </span>
-        </a>
+      </div>
+
+      <!-- Prev/Next navigation -->
+      <div class="flex my-12 px-12 w-full">
+        {prev && (
+          <a href={prev.href} class="mr-auto text-lg text-zinc-500 font-medium hover:text-zinc-300 transition-colors">
+            ← {prev.title}
+          </a>
+        )}
+        {next && (
+          <a href={next.href} class="ml-auto text-lg text-zinc-500 font-medium hover:text-zinc-300 transition-colors">
+            {next.title} →
+          </a>
+        )}
       </div>
     </div>
   </div>
