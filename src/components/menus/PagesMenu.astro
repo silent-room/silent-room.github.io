@@ -6,12 +6,13 @@ const { items } = Astro.props;
 ---
 
 <ul
-  @click="const id = $event.target.closest('li')?.dataset.id; if(id) $store.gallery.setCategory(parseInt(id))"
+  x-data
   class="flex flex-col space-y-3"
 >
   {items.map((item, index) => (
     <li
       data-id={index}
+      @click.prevent={`$store.gallery.setCategory(${index})`}
       class="group relative text-3xl md:text-4xl lg:text-5xl text-left font-extrabold md:font-bold uppercase font-features-['smcp'] mb-6 leading-[0.7] cursor-pointer"
     >
       <a

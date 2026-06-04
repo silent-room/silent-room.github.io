@@ -17,13 +17,17 @@ const menuItems = data.map(section => ({
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
-    <a href="/">{ "{H} Рукавишникова"}</a>
+    <a href="/" @click="$store.gallery.activeCategory = null">{ "{H} Рукавишникова"}</a>
   </div>
 
   <!-- Desktop Menu -->
   <div id="desktop-menu" class="hidden sm:flex  items-center gap-6 xl:gap-24 md:pr-8 xl:pr-24">
     {menuItems.map(item => (
-      <a href={item.href} class={`transition-colors ${item.active ? 'text-zinc-200' : 'text-white hover:text-zinc-300'}`}>{item.name}</a>
+      <a 
+        href={item.href} 
+        class={`transition-colors ${item.active ? 'text-zinc-200' : 'text-white hover:text-zinc-300'}`}
+        {...(item.id === 'works' ? { '@click': '$store.gallery.activeCategory = null' } : {})}
+      >{item.name}</a>
     ))}
   </div>
 
