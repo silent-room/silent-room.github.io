@@ -139,6 +139,12 @@ export function initLightbox(): void {
   }
 }
 
+// Reset flag and clean overlay before page swap (Astro View Transitions)
+document.addEventListener("astro:before-swap", () => {
+  isLightboxInitialized = false;
+  document.querySelectorAll<HTMLElement>(".fixed.inset-0.z-\\[100\\]").forEach(el => el.remove());
+});
+
 // Init on load
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initLightbox);

@@ -2,32 +2,50 @@
 import BaseSection from "./BaseSection.astro"
 import PagesMenu from "../menus/PagesMenu.astro"
 import GalleryGrid from "../gallery/GalleryGrid.astro"
+import GalleryCategoryNav from "../gallery/GalleryCategoryNav.astro"
 import data from "../../data/data.json"
 
-const id = "works";
-const sectionData = data.find(s => s.id === id);
-const sections = sectionData?.content.map(item => ({
+interface Props {
+  category: {
+    id: string;
+    title: string;
+    images: string[];
+  };
+}
+
+const { category } = Astro.props;
+const worksData = data.find(s => s.id === "works");
+const allCategories = worksData?.content ?? [];
+const coverImage = worksData?.image ?? "01.jpg";
+const menuItems = allCategories.map(item => ({
   label: item.title,
   href: `#${item.id}`
-})) ?? [];
+}));
 ---
 
-<BaseSection {id}>
-  <div x-data class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
+<BaseSection id="works">
+  <!-- Mobile: sticky category strip + single-category grid (<sm) -->
+  <div class="sm:hidden flex flex-col w-full h-full">
+    <GalleryCategoryNav categories={allCategories} activeId={category.id} />
+    <div class="w-full flex-1">
+      <GalleryGrid items={category.images.map(src => ({ src, title: category.title }))} />
+    </div>
+  </div>
+
+  <!-- Desktop (sm+): original layout — cover/grid on the left, PagesMenu on the right -->
+  <div x-data class="hidden sm:flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
     <!-- Left: Cover / Gallery Grid -->
     <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
-      <!-- Cover Image (default state) -->
       <img
         x-show="$store.gallery.activeCategory === null"
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        src={`/src/images/${sectionData?.image}`}
-        alt={sectionData?.title}
+        src={`/src/images/${coverImage}`}
+        alt={worksData?.title}
         class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
       >
 
-      <!-- Gallery Grid (active state) -->
       <div
         x-show="$store.gallery.activeCategory !== null"
         x-cloak
@@ -39,14 +57,14 @@ const sections = sectionData?.content.map(item => ({
         x-transition:leave-end="opacity-0"
         class="absolute inset-0 overflow-y-auto bg-white"
       >
-        <GalleryGrid categories={sectionData?.content ?? []} />
+        <GalleryGrid items={allCategories.flatMap(c => c.images.map(src => ({ src, title: c.title })))} />
       </div>
     </div>
 
-    <!-- Menu (untouched) -->
+    <!-- Right: PagesMenu (untouched) -->
     <div class="w-full lg:flex-1 flex justify-center items-center">
       <div class="wrapper p-8">
-        <PagesMenu items={sections} />
+        <PagesMenu items={menuItems} />
       </div>
     </div>
   </div>

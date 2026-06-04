@@ -7,7 +7,7 @@ const menuItems = data.map(section => ({
   id: section.id,
   name: section.title,
   href: section.id === "works" ? "/" : (section.href ?? `#${section.id}`),
-  active: section.id === "works" ? currentPath === "/" : (section.href ? currentPath.startsWith(section.href) : false)
+  active: section.id === "works" ? (currentPath === "/" || currentPath.startsWith("/works/")) : (section.href ? currentPath.startsWith(section.href) : false)
 }));
 ---
 
@@ -17,7 +17,7 @@ const menuItems = data.map(section => ({
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
-    <a href="/" @click="$store.gallery.activeCategory = null">{ "{H} Рукавишникова"}</a>
+    <a href="/">{ "{H} Рукавишникова"}</a>
   </div>
 
   <!-- Desktop Menu -->
@@ -26,7 +26,6 @@ const menuItems = data.map(section => ({
       <a 
         href={item.href} 
         class={`transition-colors ${item.active ? 'text-zinc-200' : 'text-white hover:text-zinc-300'}`}
-        {...(item.id === 'works' ? { '@click': '$store.gallery.activeCategory = null' } : {})}
       >{item.name}</a>
     ))}
   </div>

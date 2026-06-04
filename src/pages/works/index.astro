@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro"
+import WorksSection from "../../components/sections/WorksSection.astro"
+import data from "../../data/data.json"
+
+const worksData = data.find(s => s.id === "works");
+const firstCategory = worksData?.content?.[0];
+---
+
+<BaseLayout title={firstCategory?.title ?? "Работы"}>
+  {firstCategory && <WorksSection category={firstCategory} />}
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro"
+import WorksSection from "../../components/sections/WorksSection.astro"
+import data from "../../data/data.json"
+
+export async function getStaticPaths() {
+  const worksData = data.find(s => s.id === "works");
+  const categories = worksData?.content ?? [];
+  return categories.map(category => ({
+    params: { slug: category.id },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+---
+
+<BaseLayout title={category.title}>
+  <WorksSection category={category} />
+</BaseLayout>
