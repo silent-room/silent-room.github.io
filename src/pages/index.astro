@@ -1,12 +1,3 @@
 ---
-import BaseLayout from "../layout/BaseLayout.astro"
-import WorksSection from "../components/sections/WorksSection.astro"
-import data from "../data/data.json"
-
-const worksData = data.find(s => s.id === "works");
-const firstCategory = worksData?.content?.[0];
+return Astro.redirect("/works/");
 ---
-
-<BaseLayout>
-  {firstCategory && <WorksSection category={firstCategory} />}
-</BaseLayout>

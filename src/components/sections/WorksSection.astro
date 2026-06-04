@@ -5,12 +5,14 @@ import GalleryGrid from "../gallery/GalleryGrid.astro"
 import GalleryCategoryNav from "../gallery/GalleryCategoryNav.astro"
 import data from "../../data/data.json"
 
+interface Category {
+  id: string;
+  title: string;
+  images: string[];
+}
+
 interface Props {
-  category: {
-    id: string;
-    title: string;
-    images: string[];
-  };
+  category: Category | null;
 }
 
 const { category } = Astro.props;
@@ -19,52 +21,47 @@ const allCategories = worksData?.content ?? [];
 const coverImage = worksData?.image ?? "01.jpg";
 const menuItems = allCategories.map(item => ({
   label: item.title,
-  href: `#${item.id}`
+  href: `/works/${item.id}/`
 }));
+
+const isCover = category === null;
+const items = isCover ? [] : category.images.map(src => ({ src, title: category.title }));
 ---
 
 <BaseSection id="works">
-  <!-- Mobile: sticky category strip + single-category grid (<sm) -->
-  <div x-init={`$store.gallery.setCategory(${allCategories.findIndex(c => c.id === category.id)})`} class="sm:hidden flex flex-col w-full h-full min-h-[calc(100svh-2.5rem)]">
-    <GalleryCategoryNav categories={allCategories} activeId={category.id} />
+  <!-- Mobile: sticky category strip + grid (<sm) -->
+  <div class="sm:hidden flex flex-col w-full h-full min-h-[calc(100svh-2.5rem)]">
+    <GalleryCategoryNav categories={allCategories} activeId={category?.id} />
     <div class="w-full flex-1">
-      <GalleryGrid categories={[category]} />
+      {isCover ? (
+        <img src={`/src/images/${coverImage}`} alt={worksData?.title} class="w-full h-full object-cover" />
+      ) : (
+        <GalleryGrid items={items} />
+      )}
     </div>
   </div>
 
-  <!-- Desktop (sm+): original dynamic-gallery layout -->
-  <div x-data class="hidden sm:flex flex-row w-full h-auto">
+  <!-- Desktop (sm+): cover/grid on the left, PagesMenu on the right -->
+  <div class="hidden sm:flex flex-row w-full h-auto">
     <!-- Left: Cover / Gallery Grid -->
     <div class="relative w-full sm:w-1/2 h-[calc(100svh-2.5rem)] lg:flex-1 lg:h-[calc(100svh-3rem)]">
-      <img
-        x-show="$store.gallery.activeCategory === null"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        src={`/src/images/${coverImage}`}
-        alt={worksData?.title}
-        class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
-      >
-
-      <div
-        x-show="$store.gallery.activeCategory !== null"
-        x-cloak
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="relative w-full h-full overflow-y-auto bg-white lg:absolute lg:inset-0"
-      >
-        <GalleryGrid categories={allCategories} />
-      </div>
+      {isCover ? (
+        <img
+          src={`/src/images/${coverImage}`}
+          alt={worksData?.title}
+          class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
+        />
+      ) : (
+        <div class="w-full h-full overflow-y-auto bg-white lg:absolute lg:inset-0">
+          <GalleryGrid items={items} />
+        </div>
+      )}
     </div>
 
     <!-- Right: PagesMenu -->
     <div class="w-full sm:w-1/2 lg:flex-1 flex justify-center items-center">
       <div class="wrapper p-8">
-        <PagesMenu items={menuItems} />
+        <PagesMenu items={menuItems} mode="navigate" />
       </div>
     </div>
   </div>

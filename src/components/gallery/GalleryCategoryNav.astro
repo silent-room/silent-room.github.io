@@ -7,7 +7,7 @@ interface Category {
 
 interface Props {
   categories: Category[];
-  activeId: string;
+  activeId?: string;
 }
 
 const { categories, activeId } = Astro.props;

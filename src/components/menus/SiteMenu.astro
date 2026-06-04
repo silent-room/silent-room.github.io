@@ -6,7 +6,7 @@ const currentPath = Astro.url.pathname;
 const menuItems = data.map(section => ({
   id: section.id,
   name: section.title,
-  href: section.id === "works" ? "/" : (section.href ?? `#${section.id}`),
+  href: section.id === "works" ? "/works/" : (section.href ?? `#${section.id}`),
   active: section.id === "works" ? (currentPath === "/" || currentPath.startsWith("/works/")) : (section.href ? currentPath.startsWith(section.href) : false)
 }));
 ---
@@ -17,7 +17,7 @@ const menuItems = data.map(section => ({
 >
   <!-- Logo/Brand -->
   <div class=" text-xl" id="title">
-    <a href="/">{ "{H} Рукавишникова"}</a>
+    <a href="/works/">{ "{H} Рукавишникова"}</a>
   </div>
 
   <!-- Desktop Menu -->
