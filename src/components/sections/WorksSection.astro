@@ -19,9 +19,6 @@ const sections = sectionData?.content.map(item => ({
       <!-- Cover Image (default state) -->
       <img
         x-show="$store.gallery.activeCategory === null"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
@@ -33,6 +30,7 @@ const sections = sectionData?.content.map(item => ({
       <!-- Gallery Grid (active state) -->
       <div
         x-show="$store.gallery.activeCategory !== null"
+        x-cloak
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
