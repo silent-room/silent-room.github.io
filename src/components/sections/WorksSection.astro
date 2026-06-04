@@ -25,17 +25,17 @@ const menuItems = allCategories.map(item => ({
 
 <BaseSection id="works">
   <!-- Mobile: sticky category strip + single-category grid (<sm) -->
-  <div class="sm:hidden flex flex-col w-full h-full">
+  <div x-init={`$store.gallery.setCategory(${allCategories.findIndex(c => c.id === category.id)})`} class="sm:hidden flex flex-col w-full h-full min-h-[calc(100svh-2.5rem)]">
     <GalleryCategoryNav categories={allCategories} activeId={category.id} />
     <div class="w-full flex-1">
-      <GalleryGrid items={category.images.map(src => ({ src, title: category.title }))} />
+      <GalleryGrid categories={[category]} />
     </div>
   </div>
 
-  <!-- Desktop (sm+): original layout — cover/grid on the left, PagesMenu on the right -->
-  <div x-data class="hidden sm:flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
+  <!-- Desktop (sm+): original dynamic-gallery layout -->
+  <div x-data class="hidden sm:flex flex-row w-full h-auto">
     <!-- Left: Cover / Gallery Grid -->
-    <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
+    <div class="relative w-full sm:w-1/2 h-[calc(100svh-2.5rem)] lg:flex-1 lg:h-[calc(100svh-3rem)]">
       <img
         x-show="$store.gallery.activeCategory === null"
         x-transition:leave="transition ease-in duration-200"
@@ -55,14 +55,14 @@ const menuItems = allCategories.map(item => ({
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="absolute inset-0 overflow-y-auto bg-white"
+        class="relative w-full h-full overflow-y-auto bg-white lg:absolute lg:inset-0"
       >
-        <GalleryGrid items={allCategories.flatMap(c => c.images.map(src => ({ src, title: c.title })))} />
+        <GalleryGrid categories={allCategories} />
       </div>
     </div>
 
-    <!-- Right: PagesMenu (untouched) -->
-    <div class="w-full lg:flex-1 flex justify-center items-center">
+    <!-- Right: PagesMenu -->
+    <div class="w-full sm:w-1/2 lg:flex-1 flex justify-center items-center">
       <div class="wrapper p-8">
         <PagesMenu items={menuItems} />
       </div>
