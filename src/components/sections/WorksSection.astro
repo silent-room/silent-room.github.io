@@ -29,22 +29,39 @@ const items = isCover ? [] : category.images.map(src => ({ src, title: category.
 ---
 
 <BaseSection id="works">
-  <!-- Mobile: sticky category strip + grid (<sm) -->
-  <div class="sm:hidden flex flex-col w-full h-full min-h-[calc(100svh-2.5rem)]">
-    <GalleryCategoryNav categories={allCategories} activeId={category?.id} />
-    <div class="w-full flex-1">
-      {isCover ? (
-        <img src={`/src/images/${coverImage}`} alt={worksData?.title} class="w-full h-full object-cover" />
-      ) : (
-        <GalleryGrid items={items} />
-      )}
+  <!-- Mobile (<sm) and Tablet (sm): cover image on top, PagesMenu below.
+       Used ONLY on the cover (/works/). Detail pages render the desktop
+       row layout at all breakpoints, so the gallery grid stays usable. -->
+  {isCover && (
+    <div class="lg:hidden flex flex-col w-full gap-8 sm:gap-20">
+      <div class="w-full h-[calc(50svh-1.25rem)] sm:h-[calc(60svh-1.5rem)]">
+        <img
+          src={`/src/images/${coverImage}`}
+          alt={worksData?.title}
+          class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none"
+        />
+      </div>
+      <div class="w-full flex justify-center items-center">
+        <div class="wrapper p-8">
+          <PagesMenu items={menuItems} currentHref={undefined} />
+        </div>
+      </div>
     </div>
-  </div>
+  )}
 
-  <!-- Desktop (sm+): cover/grid on the left, PagesMenu on the right -->
-  <div class="hidden sm:flex flex-row w-full h-auto">
+  {!isCover && (
+    <div class="lg:hidden flex flex-col w-full h-full">
+      <GalleryCategoryNav categories={allCategories} activeId={category?.id} />
+      <div class="w-full flex-1 overflow-y-auto bg-white">
+        <GalleryGrid items={items} />
+      </div>
+    </div>
+  )}
+
+  <!-- Desktop (lg+): cover/grid on the left, PagesMenu on the right -->
+  <div class="hidden lg:flex flex-row w-full h-auto">
     <!-- Left: Cover / Gallery Grid -->
-    <div class="relative w-full sm:w-1/2 h-[calc(100svh-2.5rem)] lg:flex-1 lg:h-[calc(100svh-3rem)]">
+    <div class="relative w-full lg:flex-1 h-[calc(100svh-3rem)]">
       {isCover ? (
         <img
           src={`/src/images/${coverImage}`}
@@ -59,7 +76,7 @@ const items = isCover ? [] : category.images.map(src => ({ src, title: category.
     </div>
 
     <!-- Right: PagesMenu -->
-    <div class="w-full sm:w-1/2 lg:flex-1 flex justify-center items-center">
+    <div class="w-full lg:flex-1 flex justify-center items-center">
       <div class="wrapper p-8">
         <PagesMenu items={menuItems} currentHref={category ? `/works/${category.id}/` : undefined} />
       </div>
