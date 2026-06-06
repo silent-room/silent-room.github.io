@@ -1,21 +1,35 @@
 ---
 interface Props {
   items: { label: string; href: string }[];
+  currentHref?: string;
 }
 
-const { items } = Astro.props;
+const { items, currentHref } = Astro.props;
+const isActive = (href: string) => currentHref !== undefined && href === currentHref;
 ---
 
 <ul class="flex flex-col space-y-3">
-  {items.map(item => (
-    <li
-      class="group relative text-3xl md:text-4xl lg:text-5xl text-left font-extrabold md:font-bold uppercase font-features-['smcp'] mb-6 leading-[0.7] cursor-pointer"
-    >
-      <div class="absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-6 scale-x-125 scale-y-200 group-hover:opacity-100 bg-rose-400 opacity-0"></div>
-      <a
-        href={item.href}
-        class="relative z-10 block transition-colors duration-200 group-hover:text-olive-100 text-black-blue"
-      >{item.label}</a>
-    </li>
-  ))}
+  {items.map(item => {
+    const active = isActive(item.href);
+    return (
+      <li
+        class="group relative text-3xl md:text-4xl lg:text-5xl text-left font-extrabold md:font-bold uppercase font-features-['smcp'] mb-6 leading-[0.7] cursor-pointer"
+      >
+        <a
+          href={item.href}
+          aria-current={active ? "page" : undefined}
+          class:list={[
+            "relative z-10 block transition-colors duration-200 group-hover:text-olive-100",
+            active ? "text-olive-100" : "text-black-blue",
+          ]}
+        >{item.label}</a>
+        <div
+          class:list={[
+            "absolute inset-y-0 -left-2 -right-2 z-0 transition-all duration-200 -rotate-6 scale-x-125 scale-y-200 group-hover:opacity-100",
+            active ? "bg-black opacity-100" : "bg-rose-400 opacity-0",
+          ]}
+        ></div>
+      </li>
+    );
+  })}
 </ul>
