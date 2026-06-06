@@ -38,14 +38,8 @@ function render(btns: HTMLElement[]): void {
   img.addEventListener("click", (e) => {
     e.stopPropagation();
     zoomed = !zoomed;
-    img.className = zoomed
-      ? "max-w-none max-h-none w-auto h-auto cursor-zoom-out select-none"
-      : "max-h-[85vh] max-w-[90vw] object-contain select-none cursor-zoom-in transition-transform duration-300";
-    if (overlay) {
-      overlay.className = zoomed
-        ? "lightbox-overlay fixed inset-0 z-[100] bg-black/90 overflow-auto flex items-start justify-center p-4"
-        : "lightbox-overlay fixed inset-0 z-[100] bg-black/90 flex items-center justify-center";
-    }
+    img.style.transform = zoomed ? "scale(1.5)" : "scale(1)";
+    img.style.transformOrigin = "center center";
   });
 
   const inner = document.createElement("div");
