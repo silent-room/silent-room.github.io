@@ -34,7 +34,7 @@ const items = isCover ? [] : category.images.map(src => ({ src, title: category.
        row layout at all breakpoints, so the gallery grid stays usable. -->
   {isCover && (
     <div class="lg:hidden flex flex-col w-full gap-8 sm:gap-20">
-      <div class="w-full h-[calc(50svh-1.25rem)] sm:h-[calc(60svh-1.5rem)]">
+      <div class="w-full h-[calc(50svh-1.25rem)]">
         <img
           src={`/src/images/${coverImage}`}
           alt={worksData?.title}
