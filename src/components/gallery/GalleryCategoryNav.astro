@@ -12,52 +12,36 @@ interface Props {
 
 const { categories, activeId } = Astro.props;
 const activeIndex = categories.findIndex(c => c.id === activeId);
+const prev = activeIndex > 0 ? categories[activeIndex - 1] : null;
+const next = activeIndex >= 0 && activeIndex < categories.length - 1 ? categories[activeIndex + 1] : null;
+const active = activeIndex >= 0 ? categories[activeIndex] : null;
 ---
 
 <nav
   aria-label="Категории работ"
-  class="sm:hidden sticky top-10 z-40 bg-black-blue text-white border-t border-white/10"
+  class="sticky top-10 z-40 bg-black-blue text-white border-t border-white/10"
 >
-  <ul
-    class="sm:hidden flex overflow-x-auto snap-x snap-mandatory pl-[calc(50vw-2rem)] pr-[calc(50vw-2rem)] py-3 gap-6 uppercase font-extrabold font-features-['smcp'] tracking-tight"
-    style="scrollbar-width: none; scroll-padding-inline: 50%;"
-  >
-    {categories.map(cat => {
-      const isActive = cat.id === activeId;
-      return (
-        <li
-          class="snap-center shrink-0"
-          style={isActive ? "scroll-margin-inline: 50%;" : ""}
-        >
-          <a
-            href={cat.href}
-            aria-current={isActive ? "page" : undefined}
-            class:list={[
-              "block py-1 transition-opacity",
-              isActive ? "text-base opacity-100" : "text-sm opacity-60 hover:opacity-100",
-            ]}
-          >{cat.title}</a>
-        </li>
-      );
-    })}
+  <ul class="grid grid-cols-3 items-center px-2 sm:px-6 py-3 uppercase font-extrabold font-features-['smcp'] tracking-tight">
+    <li class="text-left">
+      {prev ? (
+        <a
+          href={prev.href}
+          class="text-xs sm:text-sm opacity-60 hover:opacity-100 transition-opacity"
+        >{prev.title}</a>
+      ) : <span aria-hidden="true"></span>}
+    </li>
+    <li class="text-center">
+      {active ? (
+        <span aria-current="page" class="text-base sm:text-xl">{active.title}</span>
+      ) : <span aria-hidden="true"></span>}
+    </li>
+    <li class="text-right">
+      {next ? (
+        <a
+          href={next.href}
+          class="text-xs sm:text-sm opacity-60 hover:opacity-100 transition-opacity"
+        >{next.title}</a>
+      ) : <span aria-hidden="true"></span>}
+    </li>
   </ul>
 </nav>
-<script is:inline>
-  function centerActiveCategory() {
-    const active = document.querySelector(
-      'nav[aria-label="Категории работ"] ul li[style*="scroll-margin"]'
-    );
-    if (!active) return;
-    const ul = active.parentElement;
-    if (!ul) return;
-    const target = active.offsetLeft - (ul.clientWidth - active.offsetWidth) / 2;
-    ul.scrollLeft = Math.max(0, target);
-  }
-
-  document.addEventListener("astro:page-load", centerActiveCategory);
-  centerActiveCategory();
-</script>
-
-<style>
-  ul::-webkit-scrollbar { display: none; }
-</style>
