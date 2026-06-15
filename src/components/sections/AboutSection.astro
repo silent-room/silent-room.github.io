@@ -1,9 +1,95 @@
 ---
 import BaseSection from "./BaseSection.astro"
+import aboutData from "../../data/about.json"
 
 const id = "about";
 ---
 
 <BaseSection {id}>
-  <p>about</p>
+  <div class="flex flex-col lg:flex-row w-full">
+    <!-- Image Side -->
+    <div class="w-full h-[50svh] lg:w-1/2 lg:sticky lg:top-0 lg:h-screen">
+      <img 
+        src={`/src/images/${aboutData.photo}`} 
+        alt={aboutData.greeting}
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- Content Side -->
+    <div class="w-full lg:w-1/2 p-6 md:p-12 lg:p-20 bg-white text-black">
+      
+      <div class="space-y-12 max-w-2xl mx-auto w-full py-12 lg:py-24">
+        
+        <!-- Greeting -->
+        <h1 class="text-xl md:text-2xl font-medium leading-relaxed">
+          {aboutData.greeting}
+        </h1>
+
+        <!-- Work With -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
+          <p class="text-sm text-gray-500 lg:col-span-1">С чем я работаю:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
+            {aboutData.work_with.map((item) => (
+              <span class="text-xs font-bold uppercase tracking-wider">{item}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Experience Block -->
+        <div class="py-8 border-t border-b border-dotted border-gray-300 text-center space-y-6">
+          <h2 class="text-lg md:text-xl font-bold uppercase tracking-tight">
+            {aboutData.experience}
+          </h2>
+          <p class="text-sm md:text-base font-bold uppercase tracking-tight leading-tight">
+            {aboutData.global_reach.text.split(aboutData.global_reach.highlight).map((part, index, array) => (
+              <>
+                {part}
+                {index < array.length - 1 && (
+                  <span class="bg-yellow-300 px-1">
+                    {aboutData.global_reach.highlight}
+                  </span>
+                )}
+              </>
+            ))}
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
+          <p class="text-sm text-gray-500 lg:col-span-1">Что я умею:</p>
+          <div class="lg:col-span-2">
+            <ul class="space-y-3">
+              {aboutData.skills.map((skill) => (
+                <li class="text-sm leading-relaxed">{skill}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Clients -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
+          <p class="text-sm text-gray-500 lg:col-span-1">Клиенты:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
+            {aboutData.clients.map((client) => (
+              <span class="text-xs font-bold uppercase tracking-wider">{client}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Philosophy -->
+        <div class="space-y-6">
+          {aboutData.philosophy.map((para) => (
+            <p class="text-sm leading-relaxed text-gray-700">
+              {para}
+            </p>
+          ))}
+          <p class="text-xs italic text-gray-500 leading-relaxed">
+            {aboutData.confidentiality_note}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </BaseSection>
