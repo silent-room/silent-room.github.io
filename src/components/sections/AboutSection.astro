@@ -11,7 +11,7 @@ const id = "about";
       <img 
         src="/src/images/01.jpg" 
         alt="Привет! Я - Наталья Рукавишникова"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none"
       />
     </div>
 
@@ -21,13 +21,13 @@ const id = "about";
       <div class="space-y-12 max-w-2xl mx-auto w-full py-2 lg:py-8">
         
         <!-- Greeting -->
-        <h1 class="text-lg leading-relaxed">
+        <h1 class="text-lg leading-relaxed text-left md:text-center lg:text-left">
           Привет! Я - Наталья Рукавишникова
         </h1>
 
         <!-- Work With -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
-          <p class="text-base text-gray-500 lg:col-span-1">С чем я работаю:</p>
+        <div class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
+          <p class="text-base text-gray-500 lg:col-span-1 text-left md:text-center lg:text-left">С чем я работаю:</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
             <span class="text-sm font-bold uppercase tracking-tight">ИМИДЖЕВАЯ СЪЁМКА</span>
             <span class="text-sm font-bold uppercase tracking-tight">АКТЁРСКИЕ ПОРТФОЛИО</span>
@@ -49,14 +49,18 @@ const id = "about";
             ПРОФЕССИОНАЛЬНЫЙ РЕТУШЁР С 2017
           </h2>
           <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight">
-            РАБОТАЮ С ФОТОГРАФАМИ И БРЕНДАМИ <br /> <span class="bg-yellow-300 px-1">ПО ВСЕМУ МИРУ</span>
+            <span class="relative z-10">РАБОТАЮ С ФОТОГРАФАМИ И БРЕНДАМИ</span> <br /> 
+            <span class="relative inline-block">
+              <span class="relative z-10 px-1">ПО ВСЕМУ МИРУ</span>
+              <span class="absolute inset-y-0 -left-1 -right-1 z-0 -rotate-9 sm:-rotate-5 scale-x-120 scale-y-160 bg-yellow-300 opacity-100"></span>
+            </span>
           </h2>
 					</div>
         </div>
 
         <!-- Skills -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
-          <p class="text-base text-gray-500 lg:col-span-1">Что я умею:</p>
+          <p class="text-base text-gray-500 lg:col-span-1 text-center lg:text-left">Что я умею:</p>
           <div class="lg:col-span-2">
             <ul class="space-y-3">
               <li class="text-lg leading-relaxed">High-End ретушь</li>
@@ -68,8 +72,8 @@ const id = "about";
         </div>
 
         <!-- Clients -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
-          <p class="text-base text-gray-500 lg:col-span-1">Клиенты:</p>
+        <div class="grid  grid-cols-2 md:grid-cols-1  lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
+          <p class="text-base text-gray-500 lg:col-span-1 text-left md:text-center lg:text-left">Клиенты:</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
             <span class="text-sm font-bold uppercase tracking-tight">RENATO CIPULLO JEWELRY</span>
             <span class="text-sm font-bold uppercase tracking-tight">CISUM COUTURE</span>
