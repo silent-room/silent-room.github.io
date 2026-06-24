@@ -37,11 +37,12 @@ const id = "about";
         </div>
 
         <!-- Experience Block -->
-        <div class="py-8 border-t border-b border-dotted border-gray-300 text-center space-y-6">
+				<div class="py-8 border-t border-b border-dotted border-gray-300 text-center space-y-6">
+					<div class="wpapper px-8">
           <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight">
             {aboutData.experience}
           </h2>
-          <p class="text-sm md:text-2xl font-bold uppercase tracking-tight leading-tight">
+          <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight">
             {aboutData.global_reach.text.split(aboutData.global_reach.highlight).map((part, index, array) => (
               <>
                 {part}
@@ -52,7 +53,8 @@ const id = "about";
                 )}
               </>
             ))}
-          </p>
+					</h2>
+					</div>
         </div>
 
         <!-- Skills -->
