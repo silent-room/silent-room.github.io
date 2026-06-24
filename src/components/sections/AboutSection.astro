@@ -1,6 +1,5 @@
 ---
 import BaseSection from "./BaseSection.astro"
-import aboutData from "../../data/about.json"
 
 const id = "about";
 ---
@@ -10,8 +9,8 @@ const id = "about";
     <!-- Image Side -->
     <div class="w-full h-[50svh] lg:w-1/2 lg:sticky lg:top-0 lg:h-screen">
       <img 
-        src={`/src/images/${aboutData.photo}`} 
-        alt={aboutData.greeting}
+        src="/src/images/01.jpg" 
+        alt="Привет! Я - Наталья Рукавишникова"
         class="w-full h-full object-cover"
       />
     </div>
@@ -23,37 +22,35 @@ const id = "about";
         
         <!-- Greeting -->
         <h1 class="text-lg leading-relaxed">
-          {aboutData.greeting}
+          Привет! Я - Наталья Рукавишникова
         </h1>
 
         <!-- Work With -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
           <p class="text-base text-gray-500 lg:col-span-1">С чем я работаю:</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
-            {aboutData.work_with.map((item) => (
-              <span class="text-sm font-bold uppercase tracking-tight">{item}</span>
-            ))}
+            <span class="text-sm font-bold uppercase tracking-tight">ИМИДЖЕВАЯ СЪЁМКА</span>
+            <span class="text-sm font-bold uppercase tracking-tight">АКТЁРСКИЕ ПОРТФОЛИО</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ОДЕЖДА И БЕЛЬЕ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ЮВЕЛИРНЫЕ ИЗДЕЛИЯ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ПРЕДМЕТНАЯ ФОТОГРАФИЯ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ОБЛОЖКИ ЖУРНАЛОВ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">РЕКЛАМНЫЕ СЪЁМКИ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ЛУКБУКИ</span>
+            <span class="text-sm font-bold uppercase tracking-tight">E-COMMERCE</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ЧАСТНЫЕ СЪЁМКИ</span>
           </div>
         </div>
 
         <!-- Experience Block -->
-				<div class="py-8 border-t border-b border-dotted border-gray-300 text-center space-y-6">
+				<div class="py-8 border-y-1 border-dashed border-zinc-700 text-center space-y-6">
 					<div class="wpapper px-8">
-          <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight">
-            {aboutData.experience}
+          <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight pb-4">
+            ПРОФЕССИОНАЛЬНЫЙ РЕТУШЁР С 2017
           </h2>
           <h2 class="text-lg md:text-2xl font-bold uppercase tracking-tight">
-            {aboutData.global_reach.text.split(aboutData.global_reach.highlight).map((part, index, array) => (
-              <>
-                {part}
-                {index < array.length - 1 && (
-                  <span class="bg-yellow-300 px-1">
-                    {aboutData.global_reach.highlight}
-                  </span>
-                )}
-              </>
-            ))}
-					</h2>
+            РАБОТАЮ С ФОТОГРАФАМИ И БРЕНДАМИ <br /> <span class="bg-yellow-300 px-1">ПО ВСЕМУ МИРУ</span>
+          </h2>
 					</div>
         </div>
 
@@ -62,9 +59,10 @@ const id = "about";
           <p class="text-base text-gray-500 lg:col-span-1">Что я умею:</p>
           <div class="lg:col-span-2">
             <ul class="space-y-3">
-              {aboutData.skills.map((skill) => (
-                <li class="text-lg leading-relaxed">{skill}</li>
-              ))}
+              <li class="text-lg leading-relaxed">High-End ретушь</li>
+              <li class="text-lg leading-relaxed">Работа с цветом, color grading, приведения цвета под образец</li>
+              <li class="text-lg leading-relaxed">Фотоманипуляции, коллажирование</li>
+              <li class="text-lg leading-relaxed">3D моделирование, визуализация и внедрение 3D объектов в фотографии.</li>
             </ul>
           </div>
         </div>
@@ -73,21 +71,30 @@ const id = "about";
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 lg:items-end">
           <p class="text-base text-gray-500 lg:col-span-1">Клиенты:</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 lg:col-span-2">
-            {aboutData.clients.map((client) => (
-              <span class="text-sm font-bold uppercase tracking-tight">{client}</span>
-            ))}
+            <span class="text-sm font-bold uppercase tracking-tight">RENATO CIPULLO JEWELRY</span>
+            <span class="text-sm font-bold uppercase tracking-tight">CISUM COUTURE</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ALROSA DIAMONDS</span>
+            <span class="text-sm font-bold uppercase tracking-tight">PALMETTA</span>
+            <span class="text-sm font-bold uppercase tracking-tight">AZZA FAHMY JEWELLERY</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ASHLEY LAUREN</span>
+            <span class="text-sm font-bold uppercase tracking-tight">MDNA SKIN</span>
+            <span class="text-sm font-bold uppercase tracking-tight">ASTRA ZENECA</span>
           </div>
         </div>
 
         <!-- Philosophy -->
         <div class="space-y-6">
-          {aboutData.philosophy.map((para) => (
-            <p class="text-lg font-light leading-relaxed text-gray-700">
-              {para}
-            </p>
-          ))}
+          <p class="text-lg font-light leading-relaxed text-gray-700">
+            Как ретушёр я всегда стремлюсь к максимальному качеству и точному выражению видения моих клиентов.
+          </p>
+          <p class="text-lg font-light leading-relaxed text-gray-700">
+            Моя специализация - коммерческая ретушь, цветокоррекция и подготовка изображений для печатных и цифровых публикаций.
+          </p>
+          <p class="text-lg font-light leading-relaxed text-gray-700">
+            Моя цель - раскрыть весь потенциал каждого снимка.
+          </p>
           <p class="text-base italic text-gray-500 leading-relaxed">
-            {aboutData.confidentiality_note}
+            * Уважая конфиденциальность моих клиентов, я не публикую исходные изображения и сравнения «до/после».
           </p>
         </div>
 
