@@ -4,6 +4,7 @@ import PagesMenu from "../menus/PagesMenu.astro"
 import GalleryGrid from "../gallery/GalleryGrid.astro"
 import GalleryCategoryNav from "../gallery/GalleryCategoryNav.astro"
 import data from "../../data/data.json"
+import { Image } from "astro:assets"
 
 interface Category {
   id: string;
@@ -24,6 +25,22 @@ const menuItems = allCategories.map(item => ({
   href: `/works/${item.id}/`
 }));
 
+// Import all images from src/images using glob
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });
+
+// Helper to get image module by relative path from data.json
+function getImage(path: string) {
+  const key = `../../images/${path}`;
+  const mod = imageModules[key];
+  if (!mod) {
+    console.warn(`Image not found: ${key}`);
+    return null;
+  }
+  return mod.default;
+}
+
+const coverImageModule = getImage(coverImage);
+
 const isCover = category === null;
 const items = isCover ? [] : category.images.map(src => ({ src, title: category.title }));
 ---
@@ -32,11 +49,11 @@ const items = isCover ? [] : category.images.map(src => ({ src, title: category.
   <!-- Mobile (<sm) and Tablet (sm): cover image on top, PagesMenu below.
        Used ONLY on the cover (/works/). Detail pages render the desktop
        row layout at all breakpoints, so the gallery grid stays usable. -->
-  {isCover && (
+  {isCover && coverImageModule && (
     <div class="lg:hidden flex flex-col w-full gap-8 sm:gap-20">
       <div class="w-full h-[calc(50svh-1.25rem)]">
-        <img
-          src={`/src/images/${coverImage}`}
+        <Image
+          src={coverImageModule}
           alt={worksData?.title}
           class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none"
         />
@@ -62,9 +79,9 @@ const items = isCover ? [] : category.images.map(src => ({ src, title: category.
   <div class="hidden lg:flex flex-row w-full h-auto">
     <!-- Left: Cover / Gallery Grid -->
     <div class="relative w-full lg:flex-1 h-[calc(100svh-3rem)]">
-      {isCover ? (
-        <img
-          src={`/src/images/${coverImage}`}
+      {isCover && coverImageModule ? (
+        <Image
+          src={coverImageModule}
           alt={worksData?.title}
           class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
         />

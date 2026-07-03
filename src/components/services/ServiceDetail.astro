@@ -1,5 +1,7 @@
 ---
 import BaseSection from "../sections/BaseSection.astro";
+import { Image } from "astro:assets";
+
 interface ServiceItem {
   id: string;
   title: string;
@@ -25,19 +27,36 @@ const { service, prev, next } = Astro.props;
 
 const hasPerItemPrices = service.list?.some(item => "price" in item && item.price != null);
 const hasDefaultPrice = "default_price" in service && service.default_price != null;
-// collage mode: no per-item prices, no default_price
 const isCollageMode = !hasPerItemPrices && !hasDefaultPrice;
+
+// Import all images from src/images using glob
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });
+
+// Helper to get image module by relative path
+function getImage(path: string) {
+  const key = `../../images/${path}`;
+  const mod = imageModules[key];
+  if (!mod) {
+    console.warn(`Image not found: ${key}`);
+    return null;
+  }
+  return mod.default;
+}
+
+const serviceImage = service.image ? getImage(service.image) : null;
 ---
 
 <BaseSection>
   <div class="flex flex-col lg:flex-row w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
     <!-- Image -->
     <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
-      <img
-        src={`/src/images/${service.image}`}
-        alt={service.title}
-        class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
-      />
+      {serviceImage && (
+        <Image
+          src={serviceImage}
+          alt={service.title}
+          class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
+        />
+      )}
     </div>
 
     <!-- Content -->

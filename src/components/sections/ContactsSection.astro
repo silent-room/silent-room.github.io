@@ -1,5 +1,7 @@
 ---
 import BaseSection from "./BaseSection.astro"
+import { Image } from "astro:assets"
+import contactsImage from "../../images/Heroes/contacts.jpg"
 
 const id = "contacts";
 ---
@@ -8,8 +10,8 @@ const id = "contacts";
   <div class="flex flex-col lg:flex-row w-full">
     <!-- Image Side -->
     <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
-      <img
-        src="/src/images/Heroes/contacts.jpg"
+      <Image
+        src={contactsImage}
         alt="Контакты"
         class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
       />

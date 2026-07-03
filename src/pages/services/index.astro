@@ -3,12 +3,16 @@ import BaseLayout from "../../layout/BaseLayout.astro"
 import BaseSection from "../../components/sections/BaseSection.astro"
 import PagesMenu from "../../components/menus/PagesMenu.astro"
 import data from "../../data/data.json"
+import { Image } from "astro:assets"
 
 const sectionData = data.find(s => s.id === "services");
 const sections = sectionData?.content.map(item => ({
   label: item.title,
   href: item.href ?? `#${item.id}`
 })) ?? [];
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });
+const servicesImage = sectionData?.image ? imageModules[`../../images/${sectionData.image}`]?.default : null;
 ---
 
 <BaseLayout title="Услуги">
@@ -16,7 +20,13 @@ const sections = sectionData?.content.map(item => ({
     <div class="flex flex-col lg:flex-row-reverse w-full lg:h-auto gap-8 sm:gap-20 lg:gap-0">
       <!-- Image -->
       <div class="w-full h-[calc(50svh-1.25rem)] lg:relative lg:flex-1 lg:h-auto">
-        <img src={`/src/images/${sectionData?.image}`} alt={sectionData?.title} class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0">
+        {servicesImage && (
+          <Image
+            src={servicesImage}
+            alt={sectionData?.title}
+            class="w-full h-full object-cover clip-slant-bottom sm:clip-path-none lg:absolute lg:inset-0"
+          />
+        )}
       </div>
       <!-- Menu -->
       <div class="w-full lg:flex-1 flex justify-center items-center">

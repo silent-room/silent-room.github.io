@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets"
+
 interface Item {
   src: string;
   title: string;
@@ -9,19 +11,38 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// Import all images from src/images using glob
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });
+
+// Helper to get image module by relative path
+function getImage(path: string) {
+  const key = `../../images/${path}`;
+  const mod = imageModules[key];
+  if (!mod) {
+    console.warn(`Image not found: ${key}`);
+    return null;
+  }
+  return mod.default;
+}
+
+const itemsWithImages = items.map(item => ({
+  ...item,
+  imageModule: getImage(item.src)
+})).filter(item => item.imageModule);
 ---
 
 <div class="w-full h-full overflow-y-auto">
   <div class="grid grid-cols-2 sm:grid-cols-3">
-    {items.map(item => (
+    {itemsWithImages.map(item => (
       <button
         type="button"
         class="gallery-btn aspect-square overflow-hidden cursor-pointer"
-        data-src={`/src/images/${item.src}`}
+        data-src={item.imageModule.src}
         data-title={item.title}
       >
-        <img
-          src={`/src/images/${item.src}`}
+        <Image
+          src={item.imageModule}
           alt={item.title}
           class="w-full h-full object-cover transition-opacity duration-300 hover:opacity-80"
         />
