@@ -30,6 +30,17 @@ const itemsWithImages = items.map(item => ({
   ...item,
   imageModule: getImage(item.src)
 })).filter(item => item.imageModule);
+
+// Helper to construct /_image URL for lightbox
+function imageSrcToUrl(metadata: ImageMetadata): string {
+  const params = new URLSearchParams({
+    href: `/src/images/${metadata.src.replace(/^.*src\/images\//, '')}`,
+    w: String(metadata.width),
+    h: String(metadata.height),
+    f: "webp"
+  });
+  return `/_image?${params.toString()}`;
+}
 ---
 
 <div class="w-full h-full overflow-y-auto">
@@ -38,7 +49,7 @@ const itemsWithImages = items.map(item => ({
       <button
         type="button"
         class="gallery-btn aspect-square overflow-hidden cursor-pointer"
-        data-src={item.imageModule.src}
+        data-src={imageSrcToUrl(item.imageModule)}
         data-title={item.title}
       >
         <Image
