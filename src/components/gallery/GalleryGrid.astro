@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets"
+import { Image, getImage } from "astro:assets"
 
 interface Item {
   src: string;
@@ -16,7 +16,7 @@ const { items } = Astro.props;
 const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });
 
 // Helper to get image module by relative path
-function getImage(path: string) {
+function getImageModule(path: string) {
   const key = `../../images/${path}`;
   const mod = imageModules[key];
   if (!mod) {
@@ -26,21 +26,26 @@ function getImage(path: string) {
   return mod.default;
 }
 
-const itemsWithImages = items.map(item => ({
-  ...item,
-  imageModule: getImage(item.src)
-})).filter(item => item.imageModule);
+// Pre-optimize images for lightbox at build time (avoids /_image runtime endpoint)
+type ItemWithImage = { originalSrc: string; imageModule: ImageMetadata; lightboxSrc: string; title: string };
+const itemsWithImages: ItemWithImage[] = (await Promise.all(items.map(async item => {
+  const imageModule = getImageModule(item.src);
+  if (!imageModule) return null;
 
-// Helper to construct /_image URL for lightbox
-function imageSrcToUrl(metadata: ImageMetadata): string {
-  const params = new URLSearchParams({
-    href: `/src/images/${metadata.src.replace(/^.*src\/images\//, '')}`,
-    w: String(metadata.width),
-    h: String(metadata.height),
-    f: "webp"
+  const optimized = await getImage({
+    src: imageModule,
+    width: 1920,
+    fit: "inside",
+    format: "webp",
   });
-  return `/_image?${params.toString()}`;
-}
+
+  return {
+    originalSrc: item.src,
+    imageModule,
+    lightboxSrc: optimized.src,
+    title: item.title,
+  };
+}))).filter((v): v is ItemWithImage => v !== null);
 ---
 
 <div class="w-full h-full overflow-y-auto">
@@ -49,7 +54,7 @@ function imageSrcToUrl(metadata: ImageMetadata): string {
       <button
         type="button"
         class="gallery-btn aspect-square overflow-hidden cursor-pointer"
-        data-src={imageSrcToUrl(item.imageModule)}
+        data-src={item.lightboxSrc}
         data-title={item.title}
       >
         <Image
