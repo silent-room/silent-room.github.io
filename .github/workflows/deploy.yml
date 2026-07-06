@@ -23,21 +23,28 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: 'bun'
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install
 
       - name: Build Astro site
-        run: npm run build
+        run: bun run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
