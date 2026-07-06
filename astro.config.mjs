@@ -7,7 +7,6 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
 	output: 'static',
 	site: 'https://silent-room.github.io',
-	base: '/silent-room',
   vite: {
     plugins: [tailwindcss()],
   },
