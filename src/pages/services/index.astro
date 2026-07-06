@@ -5,10 +5,11 @@ import PagesMenu from "../../components/menus/PagesMenu.astro"
 import data from "../../data/data.json"
 import { Image } from "astro:assets"
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sectionData = data.find(s => s.id === "services");
 const sections = sectionData?.content.map(item => ({
   label: item.title,
-  href: item.href ?? `#${item.id}`
+  href: item.href ? base + item.href : `#${item.id}`
 })) ?? [];
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>("../../images/**/*.{jpg,jpeg,png,webp}", { eager: true });

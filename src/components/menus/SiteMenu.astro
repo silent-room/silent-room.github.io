@@ -1,20 +1,22 @@
 ---
 import data from "../../data/data.json";
 
-const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname;
+const relativePath = path.startsWith(base) ? path.slice(base.length) || '/' : path;
 
 const menuItems = data.map(section => ({
   id: section.id,
   name: section.title,
-  href: section.id === "works" ? "/works/" : (section.href ?? `#${section.id}`),
-  active: section.id === "works" ? (currentPath === "/" || currentPath.startsWith("/works/")) : (section.href ? currentPath.startsWith(section.href) : false)
+  href: section.href ? base + section.href : `#${section.id}`,
+  active: section.href ? relativePath.startsWith(section.href) : false,
 }));
 ---
 
 <nav class="sticky top-0 z-50 w-full h-10 md:h-10 lg:h-12 bg-black-blue text-white px-4 lg:pl-24 flex items-center justify-between">
   <!-- Logo/Brand -->
   <div class="text-xl" id="title">
-    <a href="/works/">{ "{H} Рукавишникова"}</a>
+    <a href={base + "/works/"}>{ "{H} Рукавишникова"}</a>
   </div>
 
   <!-- Desktop Menu -->
