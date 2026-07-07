@@ -36,7 +36,8 @@ const itemsWithImages: ItemWithImage[] = (await Promise.all(items.map(async item
     src: imageModule,
     width: 1920,
     fit: "inside",
-    format: "webp",
+		format: "webp",
+		ImageQualityPreset: "max",
   });
 
   return {
